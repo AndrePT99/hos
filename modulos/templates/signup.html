@@ -1,0 +1,283 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Registro{% endblock %}
+
+{% block Contenido %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/registro.css' %}">
+
+<!-- Imagen de fondo -->
+<img src="{% static 'img/negro.jpg' %}" class="fondo">
+
+<!-- Formulario de Registro -->
+<div class="registro-form-container">
+    <h2>Formulario de Registro</h2>
+
+    <!-- Manejo de errores generales del formulario -->
+    {% if form.non_field_errors %}
+        <div class="errorlist">
+            <ul>
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <!-- Inicio del formulario -->
+    <form action="{% url 'registro_cliente' %}" method="post" id="registrationForm" novalidate>
+        {% csrf_token %}
+
+        <!-- Fila 1: Nombre de Usuario -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="username">Nombre de Usuario: *</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.username.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Fila 2: Correo Electrónico -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email">Correo Electrónico: *</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.email.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Fila 3: Número de Documento y Tipo de Documento -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="numero_documento">Número de Documento: *</label>
+                {{ form.numero_documento }}
+                {% if form.numero_documento.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.numero_documento.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="tipo_documento">Tipo de Documento: *</label>
+                {{ form.tipo_documento }}
+                {% if form.tipo_documento.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.tipo_documento.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Fila 4: Primer Nombre y Segundo Nombre -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nombre1">Primer Nombre: *</label>
+                {{ form.nombre1 }}
+                {% if form.nombre1.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.nombre1.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="nombre2">Segundo Nombre:</label>
+                {{ form.nombre2 }}
+                {% if form.nombre2.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.nombre2.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Fila 5: Primer Apellido y Segundo Apellido -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="apellido1">Primer Apellido: *</label>
+                {{ form.apellido1 }}
+                {% if form.apellido1.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.apellido1.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="apellido2">Segundo Apellido:</label>
+                {{ form.apellido2 }}
+                {% if form.apellido2.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.apellido2.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Fila 6: Dirección -->
+        <div class="form-group">
+            <label for="direccion">Dirección: *</label>
+            {{ form.direccion }}
+            {% if form.direccion.errors %}
+                <div class="errorlist">
+                    <ul>
+                        {% for error in form.direccion.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Fila 7: Correo Electrónico 2 (Opcional) -->
+        <div class="form-group">
+            <label for="correo2">Correo Electrónico 2 (Opcional):</label>
+            {{ form.correo2 }}
+            {% if form.correo2.errors %}
+                <div class="errorlist">
+                    <ul>
+                        {% for error in form.correo2.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Fila 8: Teléfonos -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="telefono1">Teléfono 1: *</label>
+                {{ form.telefono1 }}
+                {% if form.telefono1.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.telefono1.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="telefono2">Teléfono 2:</label>
+                {{ form.telefono2 }}
+                {% if form.telefono2.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.telefono2.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Fila 9: Fecha de Nacimiento y Género -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="fechanacimiento">Fecha de Nacimiento: *</label>
+                {{ form.fechanacimiento }}
+                {% if form.fechanacimiento.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.fechanacimiento.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="genero">Género: *</label>
+                {{ form.genero }}
+                {% if form.genero.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.genero.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Fila 10: Contraseña y Confirmar Contraseña -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="password1">Contraseña: *</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.password1.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirmar Contraseña: *</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <div class="errorlist">
+                        <ul>
+                            {% for error in form.password2.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Botón de Envío -->
+        <div class="form-group">
+            <input type="submit" value="REGISTRAR">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

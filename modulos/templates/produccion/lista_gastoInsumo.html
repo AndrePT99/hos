@@ -1,0 +1,74 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Lista gasto insumos {% endblock %}
+{% block Contenido %}
+
+<h2 class="dash-title">Gasto insumos</h2>
+
+<section class="recent">
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'crear_gastoInsumo' %}" method="GET" style="display:inline;">
+                <button class="btn-add" style="background-color: #00913f; color: white; border: none;">Registrar</button>
+            </form>
+            <form action="{% url 'exportar_gasto_insumos' %}" method="get">
+                <button class="btn-download" type="submit" style="background-color:	#1034A6; color: white; border: none;">
+                    <i class="fas fa-download"></i> Descargar
+                </button>
+            </form> 
+            
+        </div>
+    
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class="table-responsive">
+        <table class="styled-table"> 
+            <thead>
+                <tr>
+                    <th>Número de Venta</th>
+                    <th>Fecha</th>
+                    <th>Insumo</th>
+                    <th>ID Orden de Producción</th>
+                    <th>Cantidad</th>
+                    <th>Unidad Medida</th>
+                    <th>Comentarios</th>
+                    <th>Acciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in controlgastoinsumo %}
+                <tr>
+                    
+                    <td>{{ item.ordendeproduccion_idordendeproduccion.detalleventa_iddetalleventa.venta_idventas.numeroventa }}</td>                  
+                    <td>{{ item.fechauso|date:"Y-m-d" }}</td>
+                    <td>{{ item.insumo_idinsumos.codigo }}- {{ item.insumo_idinsumos.nombreinsumo }}</td>              
+                    <td>{{ item.ordendeproduccion_idordendeproduccion.idordendeproduccion }}</td>                    
+                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.unidaddemedida }}</td>
+                    <td>{{ item.comentarios }}</td>
+                    
+                    <td>
+                        <form action="{% url 'editar_gastoInsumo' item.idcontrolgastoinsumo %}" method="GET" style="display:inline;">
+                            <button type="submit" class="btn-edit">✏️</button>
+                        </form>
+                        <form action="{% url 'eliminar_gastoInsumo' item.idcontrolgastoinsumo %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-delete">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>           
+</section>
+
+{% endblock %}

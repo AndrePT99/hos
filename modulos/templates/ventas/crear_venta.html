@@ -1,0 +1,27 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Crear Ventas {% endblock %}
+{% block Contenido %} 
+  <h2>Registrar Venta</h2>
+
+  {% if cliente %}
+    <p><strong>Cliente:</strong> {{cliente.cliente_idclientes}}{{ cliente.nombre1 }} {{ cliente.apellido1 }} ({{ cliente.numerodocumento }})</p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ venta_form.as_p }}
+    </div>
+    <h3>Detalle de la Venta</h3>
+    <div class="form-group">
+      {{ detalle_venta_form.as_p }}
+    </div>
+
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary">Registrar Venta</button>
+  </form>
+{% endblock %}

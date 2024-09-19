@@ -1,0 +1,227 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Crear Venta {% endblock %}
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+
+
+
+<div class="card">
+    <div class="card-header">
+        Crear Venta
+    </div>
+    <div class="card-body">
+        <form method="POST" class="form-container" novalidate>
+            {% csrf_token %}
+            
+            <!-- Mostrar los campos de la venta -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_metododepago_idmetododepago">Método de Pago</label>
+                    {{ venta_form.metododepago_idmetododepago }}
+                    <div class="error-message">{{ venta_form.metododepago_idmetododepago.errors }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="id_modalidadventa">Modalidad de Venta</label>
+                    {{ venta_form.modalidadventa }}
+                    <div class="error-message">{{ venta_form.modalidadventa.errors }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="id_fechaventa">Fecha de Venta</label>
+                    {{ venta_form.fechaventa }}
+                    <div class="error-message">{{ venta_form.fechaventa.errors }}</div>
+                </div>
+            </div>
+
+            <!-- Mostrar los campos del cliente (readonly) -->
+            <h3>Información del Cliente</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_nombre1">Primer Nombre</label>
+                    {{ venta_form.nombre1 }}
+                    <div class="error-message">{{ venta_form.nombre1.errors }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="id_nombre2">Segundo Nombre</label>
+                    {{ venta_form.nombre2 }}
+                    <div class="error-message">{{ venta_form.nombre2.errors }}</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_apellido1">Primer Apellido</label>
+                    {{ venta_form.apellido1 }}
+                    <div class="error-message">{{ venta_form.apellido1.errors }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="id_apellido2">Segundo Apellido</label>
+                    {{ venta_form.apellido2 }}
+                    <div class="error-message">{{ venta_form.apellido2.errors }}</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_tipodocumento">Tipo de Documento</label>
+                    {{ venta_form.tipodocumento }}
+                    <div class="error-message">{{ venta_form.tipodocumento.errors }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="id_numerodocumento">Número de Documento</label>
+                    {{ venta_form.numerodocumento }}
+                    <div class="error-message">{{ venta_form.numerodocumento.errors }}</div>
+                </div>
+            </div>
+
+            <!-- Mostrar los detalles de la venta (formset) -->
+            <h3>Detalle de la Venta</h3>
+            {{ formset.management_form }}
+            <table id="productos-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio del Producto</th>
+                        <th>Subtotal</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} style="color: red; background-color: #fdd; border: 1px solid red; padding: 10px; border-radius: 4px;"{% endif %}>
+                                     {{ message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% for form in formset %}
+                        <tr class="formset-row">
+                            <td>{{ form.producto_idproducto }}</td>
+                            <td>{{ form.cantidad }}</td>
+                            <td><input type="text" class="precio-producto form-control" readonly></td>
+                            <td><input type="text" class="subtotal form-control" readonly></td>
+                            <td><a href="#" class="delete-row btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-success" id="add-product">Agregar Producto</button>
+
+            <!-- Mostrar el total de la venta -->
+            <div class="form-group">
+                <label>Total Venta:</label>
+                <input type="text" id="total-venta" class="form-control" readonly>
+            </div>
+
+            <!-- Botones para guardar la venta -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Guardar Venta</button>
+                <a href="{% url 'resumen_ventas' %}" class="btn btn-secondary">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tableBody = document.querySelector('#productos-table tbody');
+        const addButton = document.getElementById('add-product');
+        const totalVentaInput = document.getElementById('total-venta');
+
+        function actualizarTotalVenta() {
+            let totalVenta = 0;
+            document.querySelectorAll('.subtotal').forEach(subtotalInput => {
+                totalVenta += parseFloat(subtotalInput.value || 0);
+            });
+            totalVentaInput.value = totalVenta.toFixed(2);
+        }
+
+        function obtenerPrecioYActualizarTotal(selectElem, precioElem, cantidadElem, subtotalElem) {
+            const productoId = selectElem.value;
+            if (productoId) {
+                fetch(`/obtener-precio-producto/${productoId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        precioElem.value = data.precio;
+                        actualizarSubtotal(precioElem, cantidadElem, subtotalElem);
+                        actualizarTotalVenta();
+                    });
+            }
+        }
+
+        function actualizarSubtotal(precioElem, cantidadElem, subtotalElem) {
+            const precio = parseFloat(precioElem.value || 0);
+            const cantidad = parseInt(cantidadElem.value || 0);
+            subtotalElem.value = (precio * cantidad).toFixed(2);
+            actualizarTotalVenta();
+        }
+
+        function bindEventsToRow(row) {
+            const productoSelect = row.querySelector('select[name$="producto_idproducto"]');
+            const precioProductoInput = row.querySelector('.precio-producto');
+            const cantidadInput = row.querySelector('input[name$="cantidad"]');
+            const subtotalInput = row.querySelector('.subtotal');
+            const deleteButton = row.querySelector('.delete-row');
+
+            productoSelect.addEventListener('change', function() {
+                obtenerPrecioYActualizarTotal(productoSelect, precioProductoInput, cantidadInput, subtotalInput);
+            });
+
+            cantidadInput.addEventListener('input', function() {
+                actualizarSubtotal(precioProductoInput, cantidadInput, subtotalInput);
+            });
+
+            deleteButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                row.remove();
+                subtotalInput.value = 0;  // Eliminar subtotal de esa fila del total
+                actualizarTotalVenta();
+            });
+        }
+
+        document.querySelectorAll('.formset-row').forEach(row => {
+            bindEventsToRow(row);
+        });
+
+        addButton.addEventListener('click', function() {
+            const formsetManagementForm = document.querySelector('[name$="TOTAL_FORMS"]');
+            const totalForms = parseInt(formsetManagementForm.value);
+            const newFormIndex = totalForms;
+
+            // Clonar la última fila del formset
+            const newRow = document.querySelector('.formset-row:last-child').cloneNode(true);
+
+            // Limpiar los valores del nuevo formulario clonado
+            const productoSelect = newRow.querySelector('select[name$="producto_idproducto"]');
+            const cantidadInput = newRow.querySelector('input[name$="cantidad"]');
+            const precioInput = newRow.querySelector('.precio-producto');
+            const subtotalInput = newRow.querySelector('.subtotal');
+
+            productoSelect.value = '';  // Limpiar selección del producto
+            cantidadInput.value = '';   // Limpiar cantidad
+            precioInput.value = '';     // Limpiar precio
+            subtotalInput.value = '';   // Limpiar subtotal
+
+            // Actualizar los nombres y IDs de los campos en la nueva fila
+            newRow.querySelectorAll('input, select').forEach(input => {
+                input.name = input.name.replace(`-${totalForms - 1}-`, `-${newFormIndex}-`);
+                input.id = input.id.replace(`-${totalForms - 1}-`, `-${newFormIndex}-`);
+            });
+
+            // Añadir la nueva fila a la tabla
+            tableBody.appendChild(newRow);
+            formsetManagementForm.value = totalForms + 1;
+
+            // Vincular eventos a la nueva fila
+            bindEventsToRow(newRow);
+        });
+    });
+</script>
+
+{% endblock %}
+

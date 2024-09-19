@@ -1,0 +1,59 @@
+.micuenta-container {
+    --main-color: #000000; /* Color principal */
+    --sidebar-width: 240px; /* Ancho de la barra lateral */
+}
+
+.micuenta-container .sidebar {
+    height: 100%;
+    width: var(--sidebar-width);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--main-color);
+    color: #fff;
+    z-index: 100;
+    transition: width 300ms ease;
+    overflow-y: auto;
+}
+
+.micuenta-container .sidebar-header {
+    display: flex;
+    justify-content: flex-end; /* Se ajusta al cambio del icono sin nombre de la empresa */
+    align-items: center;
+    padding: 1rem;
+    height: 60px;
+    background-color: var(--main-color);
+}
+
+.micuenta-container .sidebar-menu ul {
+    padding: 1rem;
+}
+
+.micuenta-container .sidebar-menu li {
+    margin-bottom: 1.5rem;
+}
+
+.micuenta-container .sidebar-menu a {
+    color: #fff;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.micuenta-container .sidebar-menu a span {
+    margin-right: 0.5rem;
+}
+
+.micuenta-container .main-content {
+    flex-grow: 1;
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    transition: margin-left 300ms ease;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .micuenta-container .main-content {
+        margin-left: 60px;
+    }
+}

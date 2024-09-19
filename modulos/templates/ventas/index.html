@@ -1,0 +1,142 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Ventas {% endblock %}
+{% block Contenido %} 
+
+<h2 class="dash-title">Ventas</h2>
+            
+<div class="dash-cards">
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-briefcase"></span>
+            <div>
+                <h5>Crear una venta</h5>
+                <h4>↓</h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{{% url 'verificar_cliente' %}">Ver formulario</a>
+        </div>
+    </div>
+    
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-reload"></span>
+            <div>
+                <h5>Actualizar venta</h5>
+                <h4>↓</h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="#">Ver formulario</a>
+        </div>
+    </div>
+    
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-check-box"></span>
+            <div>
+                <h5>Insumos</h5>
+                <h4>↓</h4>
+                
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="#">ver todos los insumos</a>
+        </div>
+    </div>
+</div>
+
+<section class="recent">
+    <div class="activity-grid">
+        <div class="activity-card"> 
+            <h3>Ventas recientes</h3>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Numero de Venta</th>
+                            <th>Fecha Venta</th>
+                            <th>Modalidad Venta</th>
+                            <th>Cliente</th>
+                            <th>Metodo de Pago</th>
+                            <th>Valor Total</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for venta in ventas %}
+                        <tr>
+                            <td>{{ venta.idventas }}</td>
+                            <td>{{ venta.valortotal }}</td>
+                            <td>{{ venta.fechaventa }}</td>
+                            <td>{{ venta.modalidadventa }}</td>
+                            <td>{{ venta.cliente_idclientes.tipodocumento }}</td>
+                            <td>{{ venta.cliente_idclientes.numerodocumento }}</td>
+                            <td>{{ venta.cliente_idclientes.nombre1 }} {{ venta.cliente_idclientes.nombre2 }}</td>
+                            <td>{{ venta.cliente_idclientes.apellido1 }} {{ venta.cliente_idclientes.apellido2 }}</td>
+                            <td>{{ venta.metododepago_idmetododepago}}</td>
+                            <td>{{ venta.estado}}</td>          
+                            <td>
+                                {% if venta.estado != 'Anulada' %}
+                                    <form action="{% url 'anular_venta' venta.idventas %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas anular esta venta?');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-warning">Anular</button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="summary">
+            <div class="summary-card">
+                <div class="summary-single">
+                    <span class="ti-id-badge"></span>
+                    <div>
+                        <h5>196</h5>
+                        <small>Cantidad de productos</small>
+                    </div>
+                </div>
+                <div class="summary-single">
+                    <span class="ti-calendar"></span>
+                    <div>
+                        <h5>16</h5>
+                        <small>Cantidad de insumos</small>
+                    </div>
+                </div>
+                <div class="summary-single">
+                    <span class="ti-face-smile"></span>
+                    <div>
+                        <h5>12</h5>
+                        <small>Total de inventario</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bday-card">
+                <div class="bday-flex">
+                    <div class="bday-img"></div>
+                    <div class="bday-info">
+                        <h5>Dwayne F. Sanders</h5>
+                        <small>Birthday Today</small>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button>
+                        <span class="ti-gift"></span>
+                        Wish him
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

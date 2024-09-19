@@ -1,0 +1,132 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Inventario {% endblock %}
+{% block Contenido %}
+
+<h2 class="dash-title">Productos</h2>
+
+<div class="dash-cards">
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-briefcase"></span>
+            <div>
+                <h5>Registrar compra de nuevos productos</h5>
+                <h4>↓</h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'crear_compraProducto' %}">Ver formulario</a>
+        </div>
+    </div>
+
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-reload"></span>
+            <div>
+                <h5>Información compra de nuevos productos</h5>
+                <h4>↓</h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'lista_compraProducto' %}">Ver formulario</a>
+        </div>
+    </div>
+
+    <div class="card-single">
+        <div class="card-body">
+            <!-- Cambiamos el ícono a algo relacionado con productos -->
+            <span class="ti-package"></span>  <!-- Cambié el ícono a algo más relacionado -->
+            <div>
+                <h5>Total de productos</h5>
+                <br />
+                <!-- Aquí mostramos la cantidad de productos que pasamos desde la vista -->
+                <h4 > {{ cantidad_productos }} Productos</h4>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<section class="recent">
+
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'crear_producto' %}" method="GET" style="display:inline;">
+                <button class="btn-add" style="background-color: #00913f; color: white; border: none;">Registrar</button>
+            </form>
+            <form action="{% url 'exportar_productos' %}" method="get">
+                <button class="btn-download" type="submit" style="background-color:	#1034A6; color: white; border: none;">
+                    <i class="fas fa-download"></i> Descargar
+                </button>
+            </form>   
+            
+        </div>
+    
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="styled-table"> 
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Código</th>
+                    <th>Calidad</th>
+                    <th>Dimensión</th>
+                    <th>Precio</th>
+                    <th>Color</th>
+                    <th>Género</th>
+                    <th>Imagen</th>
+                    <th>Cantidad</th>
+                    <th>Observación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nombreproducto }}</td>
+                    <td>{{ producto.nombrecategoria }}</td>
+                    <td>{{ producto.codigo }}</td>
+                    <td>{{ producto.calidad }}</td>
+                    <td>{{ producto.dimension }}</td>
+                    <td>{{ producto.precio }}</td>
+                    <td>{{ producto.color }}</td>
+                    <td>{{ producto.genero }}</td>
+                    <td>
+                        {% if producto.imagenproducto %}
+                            <img src="{{ producto.imagenproducto.url }}" alt="{{ producto.nombreproducto }}" width="100">
+                        {% else %}
+                            <p>No hay imagen disponible</p>
+                        {% endif %}
+                    </td>
+                    <td>{{ producto.cantidad }}</td>
+                    <td>{{ producto.observaciones }}</td>
+                    <td>
+                        <form action="{% url 'editar_producto' producto.idproducto %}" method="GET" style="display:inline;">
+                            <button type="submit" class="btn-edit">✏️</button>
+                        </form>
+                        <form action="{% url 'eliminar_producto' producto.idproducto %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-delete">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No se encontraron productos.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>           
+
+</section>
+
+{% endblock %}

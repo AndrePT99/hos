@@ -1,0 +1,72 @@
+/* styles.css */
+
+/* Diseño general */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Diseño del formulario */
+form {
+    width: 50%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+textarea {
+    height: 150px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: black;
+}
+
+/* Mensaje de error */
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}

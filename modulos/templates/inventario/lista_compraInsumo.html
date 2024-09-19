@@ -1,0 +1,73 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Lista compra Insumos {% endblock %}
+{% block Contenido %}
+
+<h2 class="dash-title">Compra Insumos</h2>
+
+<section class="recent">
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'crear_compraInsumo' %}" method="GET" style="display:inline;">
+                <button class="btn-add" style="background-color: #00913f; color: white; border: none;">Registrar</button>
+            </form>
+            <form action="{% url 'exportar_compras_insumos' %}" method="get">
+                <button class="btn-download" type="submit" style="background-color:	#1034A6; color: white; border: none;">
+                    <i class="fas fa-download"></i> Descargar
+                </button>
+            </form> 
+            
+        </div>
+    
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class="table-responsive">
+        <table class="styled-table"> 
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Código</th>
+                    <th>Insumo</th>
+                    <th>Color</th>
+                    <th>Proveedor</th>
+                    <th>Precio Unidad</th>
+                    <th>Cantidad</th>
+                    <th>Precio Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comprainsumos in comprainsumos %} 
+                <tr>
+                    <td>{{ comprainsumos.fechacompra }}</td>
+                    <td>{{ comprainsumos.insumo_idinsumos.codigo }}</td>
+                    <td>{{ comprainsumos.insumo_idinsumos.nombreinsumo }}</td>
+                    <td>{{ comprainsumos.color }}</td>
+                    <td>{{ comprainsumos.proveedor_idproveedor.nombre1 }} {{ comprainsumos.proveedor_idproveedor.apellido1 }}</td>
+                    <td>{{ comprainsumos.preciounitario }}</td>
+                    <td>{{ comprainsumos.cantidad }}</td>
+                    <td>{{ comprainsumos.preciototal }}</td>
+                    <td>
+                        <form action="{% url 'editar_compraInsumo' comprainsumos.idcomprasinsumos %}" method="GET" style="display:inline;">
+                            <button type="submit" class="btn-edit">✏️</button>
+                        </form>
+                        <form action="{% url 'eliminar_compraInsumo' comprainsumos.idcomprasinsumos %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-delete">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>           
+</section>
+
+{% endblock %}

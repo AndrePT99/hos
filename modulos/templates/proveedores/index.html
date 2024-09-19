@@ -1,0 +1,97 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Proveedores {% endblock %}
+{% block Contenido %} 
+
+<h2 class="dash-title">Proveedores</h2>
+            
+<div class="dash-cards">
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-briefcase"></span>
+            <div>
+                <h5>Total de Proveedores</h5>
+                <h4>{{ cantidad_proveedores }}</h4> <!-- Mostrar el total de proveedores -->
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="#"></a>
+        </div>
+    </div>
+</div>
+
+
+<section class="recent">
+
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'crear_proveedor' %}" method="GET" style="display:inline;">
+                <button class="btn-add" style="background-color: #00913f; color: white; border: none;">Registrar</button>
+            </form>
+            <form action="{% url 'exportar_proveedores' %}" method="get">
+                <button class="btn-download" type="submit" style="background-color:	#1034A6; color: white; border: none;">
+                    <i class="fas fa-download"></i> Descargar
+                </button>
+            </form> 
+            
+        </div>
+    
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class="table-responsive">
+        <table class="styled-table"> 
+            <thead>
+                <tr>
+                    <th>Empresa</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Tipo proveedor</th> 
+                    <th>Teléfono</th>
+                    <th>Teléfono 2</th>
+                    <th>Categoria</th>
+                    <th>Dirección</th>
+                    <th>Correo 1</th>
+                    <th>Correo 2</th>
+                    <th>Sitio web</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for proveedor in proveedores %}
+                <tr>
+                    <td>{{ proveedor.nombreempresa }}</td>
+                    <td>{{ proveedor.nombre1 }} {{ proveedor.nombre2 }}</td>
+                    <td>{{ proveedor.apellido1 }} {{proveedor.apellido2 }}</td>
+                    <td>{{ proveedor.tipoproveedor }}</td>
+                    <td>{{ proveedor.telefono1 }}</td>
+                    <td>{{ proveedor.telefono2 }}</td>
+                    <td>{{ proveedor.categoriaproveedor }}</td>
+                    <td>{{ proveedor.direccion }}</td>
+                    <td>{{ proveedor.correo1 }}</td>
+                    <td>{{ proveedor.correo2 }}</td>
+                    <td>{{ proveedor.sitioweb }}</td>
+                    <td>
+                        <form action="{% url 'editar_proveedor' proveedor.idproveedor %}" method="GET" style="display:inline;">
+                            <button type="submit" class="btn-edit">✏️</button>
+                        </form>
+                        <form action="{% url 'eliminar_proveedor' proveedor.idproveedor %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-delete">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>           
+
+</section>
+
+{% endblock %}

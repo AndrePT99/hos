@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Mis Compras {% endblock %}
+
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/historial_compras.css' %}">
+<div class="compras-container">
+    <div class="card">
+        <div class="card-header">
+            Mis Compras
+        </div>
+        <div class="card-body">
+            {% if compras %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for compra in compras %}
+                            <tr>
+                                <td>{{ compra.fechaventa|date:"d/m/Y" }}</td>
+                                <td>${{ compra.valortotal }}</td>
+                                <td>
+                                    <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#detalles-{{ compra.idventas }}" aria-expanded="false" aria-controls="detalles-{{ compra.idventas }}">
+                                        Ver Detalles
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="collapse" id="detalles-{{ compra.idventas }}">
+                                <td colspan="3">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for detalle in compra.detalleventa_set.all %}
+                                                <tr>
+                                                    <td>{{ detalle.producto_idproducto.nombreproducto }}</td>
+                                                    <td>{{ detalle.cantidad }}</td>
+                                                    <td>${{ detalle.producto_idproducto.precio }}</td>
+                                                    <td>${{ detalle.subtotal }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No has realizado ninguna compra aún.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Bootstrap CSS -->
+
+
+<!-- jQuery y Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+{% endblock %}

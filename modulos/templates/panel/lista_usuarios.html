@@ -1,0 +1,80 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Lista Usuarios {% endblock %}
+{% block Contenido %} 
+
+<h2 class="dash-title">Usuarios</h2>
+            
+<div class="dash-cards">
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-briefcase"></span>
+            <div>
+                <h5>Total de Usuarios</h5>
+                <h4>{{ total_usuarios }} <!-- Mostrar la cantidad de usuarios --></h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="#">Ver formulario</a>
+        </div>
+    </div>
+</div>
+
+<section class="recent">
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'crear_usuario' %}" method="GET" style="display:inline;">
+                <button class="btn-add" style="background-color: #00913f; color: white; border: none;">Registrar</button>
+            </form>            
+                                          
+        </div>
+    
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="styled-table"> 
+            <thead>
+                <tr>
+                    <th>Documento</th>
+                    <th>Primer Nombre</th>
+                    <th>Segundo Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.numerodocumento }}</td>
+                    <td>{{ usuario.primernombre }}</td>
+                    <td>{{ usuario.segundonombre }}</td>
+                    <td>{{ usuario.primeraprellido }}</td>
+                    <td>{{ usuario.segundoaprellido }}</td>
+                    <td>{{ usuario.correo1 }}</td>
+                    <td>{{ usuario.telefono1 }}</td>
+                    <td>
+                        <form action="{% url 'editar_usuario' usuario.pk %}" method="GET" style="display:inline;">
+                            <button type="submit" class="btn-edit">✏️</button>
+                        </form>
+                        <form action="{% url 'eliminar_usuario' usuario.pk %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-delete">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>          
+</section>
+
+{% endblock %}

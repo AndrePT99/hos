@@ -1,0 +1,791 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap');
+
+
+:root {
+    --main-color: #000000;
+    --color-dark: #1D2231;
+    --text-grey: #8b94a0;
+    --text-tabla: #ffffff;
+}
+
+* {
+    font-family: 'Titillium Web', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    box-sizing: border-box;
+}
+
+#sidebar-toggle {
+    display: none;
+}
+
+.sidebar {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    background: var(--main-color);
+    color: #fff;
+    overflow-y: auto;
+    transition: width 500ms;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0rem 1rem;
+}
+
+.sidebar-menu {
+    padding: 1rem;
+}
+
+.sidebar li {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar a {
+    color: #fff;
+    font-size: .8rem;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar a span:last-child {
+    padding-left: .6rem;
+}
+
+#sidebar-toggle:checked ~ .sidebar {
+    width: 60px;
+}
+
+#sidebar-toggle:checked ~ .sidebar .sidebar-header h3 span,
+#sidebar-toggle:checked ~ .sidebar li span:last-child {
+    display: none;
+}
+
+#sidebar-toggle:checked ~ .sidebar .sidebar-header,
+#sidebar-toggle:checked ~ .sidebar li {
+    display: flex;
+    justify-content: center;
+}
+
+#sidebar-toggle:checked ~ .main-content {
+    margin-left: 60px;
+}
+
+#sidebar-toggle:checked ~ .main-content header {
+    left: 60px;
+    width: calc(100% - 60px);
+}
+
+.main-content {
+    position: relative;
+    margin-left: 240px;
+    transition: margin-left 500ms;
+}
+
+header {
+    position: fixed;
+    left: 240px;
+    top: 0;
+    z-index: 100;
+    width: calc(100% - 240px);
+    background: #fff;
+    height: 60px;
+    padding: 0rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    transition: left 500ms;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.search-wrapper input {
+    border: 0;
+    outline: 0;
+    padding: 1rem;
+    height: 38px;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+}
+
+.social-icons span {
+    margin-left: 1.2rem;
+}
+
+/* Ajuste de la imagen de perfil */
+.social-icons .profile-icon {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 1.2rem;
+    display: block; /* Asegura que se comporte correctamente como un bloque */
+    border: 2px solid #fff;
+}
+
+main {
+    margin-top: 60px;
+    background: #f1f5f9;
+    min-height: 90vh;
+    padding: 1rem 3rem;
+}
+
+.dash-title {
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+.dash-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3rem;
+}
+
+.card-single {
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+
+.card-body {
+    padding: 1.3rem 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.card-body span {
+    font-size: 1.5rem;
+    color: #777;
+    padding-right: 1.4rem;
+}
+
+.card-body h5 {
+    color: var(--text-grey);
+    font-size: 1rem;
+}
+
+.card-body h4 {
+    color: var(--color-dark);
+    font-size: 1.1rem;
+    margin-top: .2rem;
+}
+
+.card-footer {
+    padding: .2rem 1rem;
+    background: #f9fafc;
+}
+
+.card-footer a {
+    color: var(--main-color);
+}
+
+.recent {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-column-gap: 1.5rem;
+}
+
+.activity-card,
+.summary-card,
+.bday-card {
+    background: #fff;
+    border-radius: 7px;
+}
+
+.activity-card h3 {
+    color: var(--text-grey);
+    margin: 1rem;
+}
+
+.activity-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.activity-card thead {
+    background: #efefef;
+    text-align: left;
+}
+
+
+th, td {
+    font-size: .9rem;
+    padding: 1rem 1rem;
+    color: var(--text-tabla);
+}
+
+td {
+    font-size: .9rem;
+    padding: 1rem 1rem;
+    color: var(--text-grey);
+}
+
+td {
+    font-size: .8rem;
+}
+
+tbody tr:nth-child(even) {
+    background: #f9fafc;
+}
+
+.badge {
+    padding: .2rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: .7rem;
+}
+
+.badge.success {
+    background: #DEF7EC;
+    color: var(--main-color);
+}
+
+.badge.warning {
+    background: #F0F6B2;
+    color: orange;
+}
+
+.td-team {
+    display: flex;
+    align-items: center;
+}
+
+.img-1,
+.img-2,
+.img-3 {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    margin-left: -15px;
+    border: 3px solid #efefef;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.img-1 {
+    background-image: url(/static/img/1.jpg);
+}
+
+.img-2 {
+    background-image: url(/static/img/2.jpg);
+}
+
+.img-3 {
+    background-image: url(/static/img/3.jpeg);
+}
+
+.summary-card {
+    margin-bottom: 1.5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.summary-single {
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.summary-single span {
+    font-size: 1.5rem;
+    color: #777;
+    padding-right: 1rem;
+}
+
+.summary-single h5 {
+    color: var(--main-color);
+    font-size: 1.1rem;
+    margin-bottom: 0rem !important;
+}
+
+.summary-single small {
+    font-weight: 700;
+    color: var(--text-grey);
+}
+
+.bday-flex {
+    display: flex;
+    align-items: center;
+    margin-bottom: .3rem;
+}
+
+.bday-card {
+    padding: 1rem;
+}
+
+.bday-img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 3px solid #efefef;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url( /static/img/3.jpeg);
+    margin-right: .7rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-center button {
+    background: var(--main-color);
+    color: #fff;
+    border: 1px solid var(--main-color);
+    border-radius: 4px;
+    padding: .4rem 1rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    
+}
+
+@media only screen and (max-width: 1200px) {
+    .sidebar {
+        width: 60px;
+        z-index: 150;
+    }
+
+    .sidebar .sidebar-header h3 span,
+    .sidebar li span:last-child {
+        display: none;
+    }
+
+    .sidebar .sidebar-header,
+    .sidebar li {
+        display: flex;
+        justify-content: center;
+    }
+
+    .main-content {
+        margin-left: 60px;
+    }
+
+    .main-content header {
+        left: 60px;
+        width: calc(100% - 60px);
+    }
+    
+    #sidebar-toggle:checked ~ .sidebar {
+        width: 240px;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar .sidebar-header h3 span,
+    #sidebar-toggle:checked ~ .sidebar li span:last-child {
+        display: inline;
+    }
+
+    #sidebar-toggle:checked ~ .sidebar .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    #sidebar-toggle:checked ~ .sidebar li {
+        display: block;
+    }
+
+    #sidebar-toggle:checked ~ .main-content {
+        margin-left: 60px;
+    }
+
+    #sidebar-toggle:checked ~ .main-content header {
+        left: 60px;
+    }
+}
+
+@media only screen and (max-width: 860px) {
+    .dash-cards {
+        grid-template-columns: repeat(2,1fr);
+    }
+    
+    .card-single {
+        margin-bottom: 1rem;
+    }
+    
+    .activity-grid {
+        display: block;
+    }
+    
+    .summary {
+        margin-top: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .dash-cards {
+        grid-template-columns: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Submenú de la imagen de perfil */
+.profile-menu {
+    position: relative; /* Establecer como relativo para contener el submenú */
+}
+
+.profile-submenu {
+    display: none;
+    position: absolute;
+    top: 50px; /* Asegúrate de que el submenú aparezca justo debajo de la imagen */
+    right: 0; /* Alineado a la derecha */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 150px;
+}
+
+.profile-submenu.active {
+    display: block;
+}
+
+.profile-submenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-submenu li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-submenu li:last-child {
+    border-bottom: none;
+}
+
+.profile-submenu li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.profile-submenu li a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Submenú de inventario */
+.inventario-submenu {
+    display: none;
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px; /* Ajusta el margen superior si es necesario */
+}
+
+.inventario-submenu.active {
+    display: block;
+}
+
+.inventario-submenu li {
+    padding: 5px 0; /* Reduce el padding superior e inferior para reducir la separación */
+    margin: 0; /* Elimina el margen si existiera para que los elementos estén más juntos */
+}
+
+.inventario-submenu li a {
+    color: #fff; /* Color del texto */
+    text-decoration: none;
+    padding: 5px 10px; /* Control del padding dentro del enlace, ajusta según el tamaño del texto */
+}
+
+/* Mantener el texto visible al hacer hover */
+.inventario-submenu li a:hover {
+    color: #fff; /* Mantén el color del texto */
+    background-color: #000000; /* Cambia el color de fondo al pasar el mouse */
+}
+
+/* Estilos para la barra de acciones */
+.actions-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.actions-bar .action-buttons {
+    display: flex;
+    gap: 5px; /* Reduce el espacio entre los botones */
+}
+
+.actions-bar button {
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px; /* Tamaño más compacto */
+    cursor: pointer;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 0.85rem; /* Tamaño de fuente reducido */
+}
+
+.actions-bar .btn-add {
+    background-color: #5cb85c;
+}
+
+.actions-bar .btn-upload {
+    background-color: #f0ad4e;
+}
+
+.actions-bar .btn-filter {
+    background-color: #000000;
+}
+
+.actions-bar .search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.actions-bar .search-input {
+    padding: 8px; /* Tamaño compacto para el input */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 0.85rem; /* Tamaño de fuente reducido */
+    width: 200px; /* Ancho ajustado */
+}
+
+/* Estilo para la tabla compacta */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0; /* Reducir el margen de la tabla */
+    font-size: 0.85em; /* Reducir el tamaño de la fuente */
+    font-family: 'Titillium Web', sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* Reducir el sombreado para un look más limpio */
+}
+
+.styled-table thead tr {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: left;
+    height: 40px; /* Reducir la altura del thead */
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 8px 6px; /* Reducir el padding dentro de las celdas */
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #027581;
+}
+
+/* Ajustar el tamaño de los textos */
+.styled-table td, .styled-table th {
+    font-size: 0.8rem; /* Reducir el tamaño de la fuente */
+}
+
+/* Estilo para los botones de acción en las filas */
+.btn-edit, .btn-delete {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem; /* Reducir el tamaño de los botones */
+}
+
+.btn-edit {
+    color: #000000;
+}
+
+.btn-delete {
+    color: #d9534f;
+}
+
+/* Estilo para las etiquetas (tags) */
+.tag {
+    display: inline-block;
+    padding: 3px 7px; /* Reducir el tamaño del padding */
+    font-size: 0.7rem; /* Reducir el tamaño del texto */
+    background-color: #f1f5f9;
+    color: #000000;
+    border-radius: 15px; /* Más pequeño y compacto */
+    margin-right: 2px; /* Reducir el espacio entre etiquetas */
+}
+
+/* Responsividad */
+@media screen and (max-width: 768px) {
+    .styled-table thead {
+        display: none;
+    }
+    
+    .styled-table tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .styled-table td {
+        display: block;
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .styled-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .actions-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .actions-bar button {
+        margin-bottom: 5px;
+    }
+
+    .actions-bar .search-input {
+        width: 100%;
+    }
+}
+
+
+
+
+
+.table-responsive {
+    border-radius: 7px; /* Esquinas redondeadas para el contenedor */ /* Esto asegura que el contenido dentro del contenedor se ajuste a las esquinas redondeadas */
+    background-color: #fff; /* Asegura que el fondo sea visible en las esquinas redondeadas */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Puedes agregar una sombra ligera si lo deseas */
+}
+
+
+
+.styled-table {
+    border-radius: 7px; /* Aplica esquinas redondeadas a la tabla */
+    overflow: hidden; /* Asegura que las esquinas redondeadas afecten a toda la tabla */
+}
+
+
+
+.activity-card {
+    background: #fff;
+    border-radius: 7px; /* Esquinas redondeadas del contenedor de la tabla */
+    overflow: hidden; /* Asegura que las esquinas redondeadas también afecten a la tabla interna */
+}
+
+
+.styled-table th, 
+.styled-table td {
+    font-size: 0.70rem; /* Tamaño de fuente más pequeño */
+    padding: 3px 3px;   /* Ajusta el padding para que los datos se vean más compactos */
+}
+
+.styled-table th {
+    text-align: center; /* Centra el texto de los encabezados */
+    vertical-align: middle; /* Alinea verticalmente el texto en el centro */
+}
+
+
+.styled-table td {
+    text-align: center; /* Centra el texto de las celdas */
+    vertical-align: middle; /* Alinea verticalmente el texto en el centro */
+}
+
+
+
+
+
+
+
+/* Colapsado: Aplica solo al nombre de la empresa */
+.collapsed-only h3 {
+    display: none; /* Oculta por defecto */
+}
+
+/* Muestra el nombre de la empresa solo cuando la barra lateral está colapsada */
+#sidebar-toggle:checked ~ .main-content header .collapsed-only h3 {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1001; /* Asegura que esté por encima del fondo oscuro */
+    text-align: center; /* Centramos el contenido */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ventas-recientes li {
+    list-style-type: none;
+    margin-bottom: 10px;
+}

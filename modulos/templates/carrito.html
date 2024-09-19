@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block titulo %}Tu Carrito de Compras{% endblock %}
+
+{% block Contenido %}
+
+{% load static %}
+{% load custom_filters %}
+
+<link rel="stylesheet" href="{% static 'css/car.css' %}">
+
+<div class="container cart-page">
+    <h2 class="cart-title">Tu Carrito de Compras</h2>
+
+    {% if carrito.items %}
+        <div class="cart-content">
+            <div class="cart-items">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th></th> <!-- Espacio para eliminar -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, item in carrito.items %}
+                        <tr>
+                            <td>
+                                <img src="{{ item.imagen }}" alt="{{ item.nombre }}" class="cart-item-img">
+                                <div class="cart-item-info">
+                                    <strong>{{ item.nombre }}</strong>
+                                </div>
+                            </td>
+                            <td class="price">$ {{ item.precio }}</td>
+                            <td>
+                                <div class="quantity-control">
+                                    <a href="{% url 'actualizar_cantidad_carrito' key 'disminuir' %}" class="quantity-btn">-</a>
+                                    <span class="quantity">{{ item.cantidad }}</span>
+                                    <a href="{% url 'actualizar_cantidad_carrito' key 'incrementar' %}" class="quantity-btn">+</a>
+                                </div>
+                            </td>
+                            <td class="total-item">$ {{ item.cantidad|multiply:item.precio }}</td>
+                            <td>
+                                <a href="{% url 'eliminar_del_carrito' key %}" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cart-summary">
+                <h2>Resumen del Pedido</h2>
+                <div class="summary-item">
+                    <span>Subtotal:</span>
+                    <span>$ {{ total }}</span>
+                </div>
+                <div class="summary-item total">
+                    <span>Total:</span>
+                    <span>$ {{ total }}</span>
+                </div>
+                <a href="{% url 'finalizar_compra' %}" class="btn btn-primary">Finalizar compra</a>
+            </div>
+        </div>
+    {% else %}
+        <p>No hay productos en tu carrito.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

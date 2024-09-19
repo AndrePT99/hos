@@ -1,0 +1,74 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Lista compra productos {% endblock %}
+{% block Contenido %}
+
+<h2 class="dash-title">Compra productos</h2>
+
+<section class="recent">
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'crear_compraProducto' %}" method="GET" style="display:inline;">
+                <button class="btn-add" style="background-color: #00913f; color: white; border: none;">Registrar</button>
+            </form>
+            <form action="{% url 'exportar_compras_productos' %}" method="get">
+                <button class="btn-download" type="submit" style="background-color:	#1034A6; color: white; border: none;">
+                    <i class="fas fa-download"></i> Descargar
+                </button>
+            </form> 
+            
+        </div>
+    
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class="table-responsive">
+        <table class="styled-table"> 
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>codigo</th>
+                    <th>Producto</th>
+                    <th>Proveedor</th> 
+                    <th>Precio Unidad</th>
+                    <th>Cantidad</th>
+                    <th>Precio total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for compraproductos in compraproductos %}
+                <tr>
+                    <td>{{ compraproductos.fechacompra }}</td>
+                    <!-- Usar el campo ForeignKey correcto -->
+                    <td>{{ compraproductos.producto_idproducto.codigo }}</td>
+                    <td>{{ compraproductos.producto_idproducto.nombreproducto }}</td>
+                    <td>{{ compraproductos.proveedor_idproveedor.nombre1 }} {{ compraproductos.proveedor_idproveedor.apellido1 }}</td>
+                    <td>{{ compraproductos.preciounitario }}</td>
+                    <td>{{ compraproductos.cantidad }}</td>
+                    <td>{{ compraproductos.preciototal }}</td>
+
+
+                    <td>
+                        <form action="{% url 'editar_compraProducto' compraproductos.idcomprasproductos %}" method="GET" style="display:inline;">
+                            <button type="submit" class="btn-edit">✏️</button>
+                        </form>
+                        <form action="{% url 'eliminar_compraProducto' compraproductos.idcomprasproductos %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-delete">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>           
+</section>
+
+{% endblock %}

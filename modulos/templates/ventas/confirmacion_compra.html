@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block titulo %}Compra Exitosa{% endblock %}
+
+{% block Contenido %}
+<div class="card">
+    <div class="card-header">
+        ¡Compra Finalizada!
+    </div>
+    <div class="card-body">
+        <h3>¡Gracias por tu compra!</h3>
+        <p>Hemos recibido tu pedido exitosamente. En breve recibirás un correo con los detalles de tu compra.</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Volver al inicio</a>
+    </div>
+</div>
+{% endblock %}

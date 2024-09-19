@@ -1,0 +1,95 @@
+/* Estilo general para el formulario */
+.card {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(226, 108, 108, 0.1);
+    background-color: #fff;
+}
+
+.card-header {
+    font-size: 1.5em;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.card-body {
+    margin-bottom: 20px;
+}
+
+h4.card-title {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+}
+
+/* Estilo para el formulario */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+form table tr {
+    margin-bottom: 15px;
+}
+
+form table td {
+    padding: 10px;
+    vertical-align: top;
+}
+
+form table label {
+    font-weight: bold;
+}
+
+form table input,
+form table select,
+form table textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+form a {
+    margin-top: 10px;
+    display: inline-block;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para los mensajes de error del formulario */
+.field-error {
+    color: red; /* Rojo claro para los mensajes de error */
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}

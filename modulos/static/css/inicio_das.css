@@ -1,0 +1,41 @@
+/* Contenedor principal */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80vh;
+    margin-top: 50px;
+}
+
+/* Contenedor del texto a la izquierda */
+.text-container {
+    flex: 1;
+    padding-left: 50px; /* Espacio a la izquierda */
+    text-align: left;
+}
+
+/* Estilo del texto grande */
+.welcome-text {
+    font-size: 5em; /* Tamaño grande */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.sub-text {
+    font-size: 2.5em; /* También hacer más grande el texto secundario */
+    color: #333;
+}
+
+/* Contenedor de la imagen a la derecha */
+.image-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 100px; /* Mueve la imagen completamente a la derecha */
+}
+
+/* Estilo de la imagen */
+.right-image {
+    width: 500px; /* Ajustar el tamaño de la imagen */
+    height: auto;
+}

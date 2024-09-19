@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block titulo %}Catálogo de Productos{% endblock %}
+
+{% block Contenido %}
+
+{% load static %}
+{% load custom_filters %}
+
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}">
+
+<main>
+    <div class="catalogo-contenedor">
+        <!-- Barra lateral de filtros -->
+        <aside class="filter-sidebar">
+            <h3>Filtrar Productos</h3>
+            <form method="GET" action="{% url 'catalogos' %}">
+                <!-- Filtro por color -->
+                <div class="filter-group">
+                    <label for="color">Color</label>
+                    <select name="color" id="color">
+                        <option value="">Selecciona un color</option>
+                        <option value="Rojo" {% if request.GET.color == 'Rojo' %}selected{% endif %}>Rojo</option>
+                        <option value="Azul" {% if request.GET.color == 'Azul' %}selected{% endif %}>Azul</option>
+                        <option value="Verde" {% if request.GET.color == 'Verde' %}selected{% endif %}>Verde</option>
+                        <!-- Agrega más colores aquí -->
+                    </select>
+                </div>
+
+                <!-- Filtro por categoría -->
+                <div class="filter-section">
+                    <label for="categoria">Categoría:</label>
+                    <select name="categoria" id="categoria">
+                        <option value="">Todas</option>
+                        {% for producto in productos %}
+                        <option value="{{ producto.nombrecategoria }}" {% if request.GET.categoria == producto.nombrecategoria %}selected{% endif %}>{{ producto.nombrecategoria }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Filtro por género -->
+                <div class="filter-group">
+                    <label for="genero">Género</label>
+                    <select name="genero" id="genero">
+                        <option value="">Todos</option>
+                        <option value="masculino" {% if request.GET.genero == 'masculino' %}selected{% endif %}>Masculino</option>
+                        <option value="femenino" {% if request.GET.genero == 'femenino' %}selected{% endif %}>Femenino</option>
+                    </select>
+                </div>
+
+                <!-- Filtro por rango de precios -->
+                <div class="filter-group">
+                    <label for="precio_min">Rango de Precios</label>
+                    <input type="number" name="precio_min" id="precio_min" placeholder="Mínimo" value="{{ request.GET.precio_min }}">
+                    <input type="number" name="precio_max" id="precio_max" placeholder="Máximo" value="{{ request.GET.precio_max }}">
+                </div>
+
+                <!-- Filtro por nombre -->
+                <div class="filter-group">
+                    <label for="nombre">Buscar por Nombre</label>
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre del producto" value="{{ request.GET.nombre }}">
+                </div>
+
+                <button type="submit" class="filter-btn">Aplicar Filtros</button>
+            </form>
+        </aside>
+
+        <!-- Sección de productos -->
+        <section class="productos-contenedor">
+            <div class="container-items">
+                <!-- Bucle para recorrer los productos -->
+                {% for producto in productos %}
+                <div class="item">
+                    <figure>
+                        <img src="{{ producto.imagenproducto.url }}" alt="{{ producto.nombreproducto }}">
+                    </figure>
+                    <div class="info-product">
+                        <h2 class="product-name">{{ producto.nombreproducto }}</h2>
+                        <p class="price"> $ {{ producto.precio }} </p>
+                        
+                        <!-- Botón para añadir al carrito (formulario) -->
+                        <form action="{% url 'agregar_al_carrito' producto.idproducto %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">Añadir al carrito</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Barra lateral del carrito -->
+        <input type="checkbox" id="toggle-carrito" class="toggle-carrito" />
+        <label for="toggle-carrito" class="cart-btn">🛒 Ver carrito</label>
+
+        <div id="carrito-sidebar" class="sidebar">
+            <div class="carrito-header">
+                <h2>Tu carrito</h2>
+                <label for="toggle-carrito" class="close-btn">&times;</label>
+            </div>
+            <div class="carrito-items">
+                <ul id="lista-carrito">
+                    {% for key, item in carrito.items %}
+                    <li class="cart-item">
+                        <div class="cart-item-content">
+                            <div class="cart-item-image">
+                                <img src="{{ item.imagen }}" alt="{{ item.nombre }}" class="product-image">
+                            </div>
+                            <div class="cart-item-details">
+                                <h4 class="product-name">{{ item.nombre }}</h4>
+                                <p class="product-price">$ {{ item.precio }}</p>
+                                <div class="quantity-controls">
+                                    <a href="{% url 'actualizar_cantidad_carrito' key 'disminuir' %}" class="quantity-btn">-</a>
+                                    <span class="product-quantity">{{ item.cantidad }}</span>
+                                    <a href="{% url 'actualizar_cantidad_carrito' key 'incrementar' %}" class="quantity-btn">+</a>
+                                </div>
+                            </div>
+                            <div class="cart-item-remove">
+                                <a href="{% url 'eliminar_del_carrito' key %}" class="remove-btn">🗑️</a>
+                            </div>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li>Tu carrito está vacío.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="carrito-footer">
+                <p>Total: $ <span id="total-carrito">{{ total }}</span></p>
+                <form action="{% url 'mostrar_carrito' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Finalizar compra</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

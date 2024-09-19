@@ -1,0 +1,210 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block titulo %} {% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+          crossorigin="anonymous">
+    <!-- Titillium Web Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/pagina.css' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+            <div class="container">
+                <a class="navbar-brand text-red" href="{% url 'home' %}">Jhonnie Vermonds</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="femeninoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mujer</a>
+                            <ul class="dropdown-menu" aria-labelledby="femeninoDropdown">
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?categoria=Ropa&genero=femenino">Chaquetas</a></li>
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?nombre=Bolso&genero=femenino">Bolsos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?categoria=Zapatos&genero=femenino">Zapatos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?categoria=Adccesorio&genero=femenino">Accesorios</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="masculinoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hombre</a>
+                            <ul class="dropdown-menu" aria-labelledby="masculinoDropdown">
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?categoria=Ropa&genero=Masculino">Chaquetas</a></li>
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?categoria=Zapatos&genero=Masculino">Zapatos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?categoria=Adccesorio&genero=Masculino">Accesorios</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="unisexDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Unisex</a>
+                            <ul class="dropdown-menu" aria-labelledby="unisexDropdown">
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?categoria=Ropa">Chaquetas</a></li>
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?categoria=Zapatos">Zapatos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'catalogos' %}?categoria=Adccesorio">Accesorios</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'catalogos' %}" id="todosProductosDropdown">Todos los productos</a>
+                        </li>
+                    </ul>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <a href="#" class="text-light me-3">
+                            <i class="fas fa-search icon"></i> <!-- Icono de lupa -->
+                        </a>
+                        <a href="{% url 'mostrar_carrito' %}" class="text-light me-3">
+                            <i class="fas fa-shopping-bag icon"></i> <!-- Icono de bolso de compras -->
+                        </a>
+                    
+                        {% if user.is_authenticated %}
+                        <div class="dropdown">
+                            <a class="text-light dropdown-toggle" href="#" id="dropdownMenuUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hola {{ user.username }}
+                            </a>
+
+                            <!-- Submenú según el grupo del usuario -->
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuUser">
+                                {% if is_cliente %}
+                                <!-- Menú para clientes -->
+                                <li><a class="dropdown-item" href="{% url 'listar_compras_cliente' %}">Compras</a></li>
+                                <li><a class="dropdown-item" href="{% url 'actualizar_datos_cliente' %}">Actualizar Datos</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cambiar_contrasena' %}">Cambiar Contraseña</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                                {% else %}
+                                <!-- Menú para otros usuarios no clientes -->
+                                <li><a class="dropdown-item" href="{% url 'inicio' %}"> Inicio </a></li>
+                                <li><a class="dropdown-item" href="{% url 'admin_cambiar_contrasena' %}">Cambiar Contraseña</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        {% else %}
+                            <a href="{% url 'signin' %}" class="text-light me-3">
+                                <i class="fas fa-user icon"></i> <!-- Icono de iniciar sesión -->
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        {% block Contenido %}  {% endblock %}
+    </main>
+
+    <footer class="footer bg-black text-white text-center py-3">
+        <a href="https://wa.me/message/SYUDQYXA5NMPK1" target="_blank" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.instagram.com/jhonnie_vermonds?igsh=MTgxZ3pvdzVicjhrcQ==" target="_blank" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <p class="mb-2">Productos hechos a mano con esfuerzo y amor</p>
+        <ul class="list-unstyled">
+            <li><a href="{% url 'nosotros' %}" class="text-light">Nosotros</a></li>
+            <li><a href="{% url 'ayuda' %}" class="text-light">Te ayudamos</a></li>
+        </ul>
+        <p>&copy; 2024 Jhonnie Vermonds. Todos los derechos reservados.</p>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" 
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" 
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" 
+            crossorigin="anonymous"></script>
+            <!--carrussel de videos-->
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const carouselContainer = document.querySelector('.carousel-container');
+                    const videos = document.querySelectorAll('.carousel-video');
+                    const prevBtn = document.querySelector('.prev-btn');
+                    const nextBtn = document.querySelector('.next-btn');
+            
+                    let currentIndex = 0;
+                    
+                    function showVideo(index) {
+                        const offset = -index * 100; // Calcula el desplazamiento
+                        carouselContainer.style.transform = `translateX(${offset}%)`;
+                    }
+                    
+                    function playNextVideo() {
+                        currentIndex = (currentIndex + 1) % videos.length; // Avanza al siguiente video
+                        showVideo(currentIndex);
+                    }
+            
+                    nextBtn.addEventListener('click', () => {
+                        currentIndex = (currentIndex + 1) % videos.length; // Avanza al siguiente video
+                        showVideo(currentIndex);
+                    });
+            
+                    prevBtn.addEventListener('click', () => {
+                        currentIndex = (currentIndex - 1 + videos.length) % videos.length; // Retrocede al video anterior
+                        showVideo(currentIndex);
+                    });
+            
+                    // Inicializa el primer video
+                    showVideo(currentIndex);
+            
+                    // Reproduce el siguiente video cada 19 segundos (19000 milisegundos)
+                    setInterval(playNextVideo, 19000);
+            
+                });
+            </script>
+            
+
+     <!-- carrusel de fotos -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const carouselImages = document.querySelector('.carousel-images');
+    const images = document.querySelectorAll('.carousel-images img');
+    const totalImages = images.length;
+    let currentIndex = 0;
+    
+    const visibleImages = 3; // Mostrar 3 imágenes a la vez
+    const imageWidth = 100 / visibleImages;
+
+    carouselImages.style.width = `${imageWidth * totalImages}%`;
+
+    images.forEach(img => {
+        img.style.width = `${imageWidth}%`;
+    });
+
+    function moveCarousel() {
+        currentIndex++;
+        if (currentIndex > totalImages - visibleImages) {
+            currentIndex = 0;
+        }
+        const translateX = -(currentIndex * imageWidth);
+        carouselImages.style.transform = `translateX(${translateX}%)`;
+    }
+
+    setInterval(moveCarousel, 3000);
+});
+
+
+</script>
+            
+</body>
+
+</html>
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block titulo %}Inicio de sesión{% endblock %}
+{% block Contenido %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/log.css' %}">
+
+<div class="login-page">
+    <section>
+        <img src="{% static 'img/negro.jpg' %}" class="fondo">
+
+        <div class="login">
+            <h2>Iniciar sesión</h2>
+
+            <form method="post" action="{% url 'signin' %}">
+                {% csrf_token %}
+
+                <!-- Mostrar errores generales del formulario -->
+                {% if error %}
+                    <ul class="errorlist">
+                        <li>{{ error }}</li>
+                    </ul>
+                {% endif %}
+
+                <!-- Campo del correo o nombre de usuario con errores específicos -->
+                <div class="input-box">
+                    {% if form.username.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.username.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <input type="text" name="username" placeholder="Correo electrónico o nombre de usuario" value="{{ form.username.value|default_if_none:'' }}" class="{% if form.username.errors %}is-invalid{% endif %}">
+                </div>
+
+                <!-- Campo de la contraseña con errores específicos -->
+                <div class="input-box">
+                    {% if form.password.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.password.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <input type="password" name="password" placeholder="Contraseña" class="{% if form.password.errors %}is-invalid{% endif %}">
+                </div>
+
+                <!-- Botón de envío -->
+                <div class="input-box">
+                    <input type="submit" value="Iniciar sesión" id="btn">
+                </div>
+            </form>
+
+            <div class="grupo">
+                <a href="{% url 'password_reset' %}">¿Olvidaste la contraseña?</a>
+                <a href="{% url 'registro_cliente' %}">Registrarse</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

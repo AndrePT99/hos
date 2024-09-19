@@ -1,0 +1,96 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Editar Gasto Insumo {% endblock %}
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+
+<div class="card">
+    <div class="card-header">
+        Editar Gasto de Insumos
+    </div>
+    <div class="card-body">
+
+        <form method="POST" enctype="multipart/form-data" class="form-container">
+            {% csrf_token %}
+
+            <!-- Mostrar errores generales (no relacionados con campos específicos) -->
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+
+            <!-- Fecha de uso e insumo -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_fechauso">Fecha de Uso <span class="text-danger">*</span></label>
+                    {{ form.fechauso }}
+                    <div class="error-message">
+                        {{ form.fechauso.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_insumo_idinsumos">Insumo <span class="text-danger">*</span></label>
+                    {{ form.insumo_idinsumos }}
+                    <div class="error-message">
+                        {{ form.insumo_idinsumos.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cantidad y unidad de medida -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_cantidad">Cantidad <span class="text-danger">*</span></label>
+                    {{ form.cantidad }}
+                    <div class="error-message">
+                        {{ form.cantidad.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_unidaddemedida">Unidad de Medida <span class="text-danger">*</span></label>
+                    {{ form.unidaddemedida }}
+                    <div class="error-message">
+                        {{ form.unidaddemedida.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orden de producción -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_ordendeproduccion_idordendeproduccion">Orden de Producción <span class="text-danger">*</span></label>
+                    {{ form.ordendeproduccion_idordendeproduccion }}
+                    <div class="error-message">
+                        {{ form.ordendeproduccion_idordendeproduccion.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_numero_venta">Número de Venta</label>
+                    {{ form.numero_venta }}
+                    <div class="error-message">
+                        {{ form.numero_venta.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comentarios -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_comentarios">Comentarios</label>
+                    {{ form.comentarios }}
+                    <div class="error-message">
+                        {{ form.comentarios.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones alineados -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <a href="{% url 'lista_gastoInsumo' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

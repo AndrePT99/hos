@@ -1,0 +1,118 @@
+/* Contenedor del formulario */
+form {
+    width: 80%;
+    margin: auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Estilo para las tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #000000;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Estilo para los inputs y selectores */
+input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Configurar el layout del formulario en dos columnas */
+.form-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.form-grid .form-group {
+    width: calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Botón de agregar productos */
+button {
+    background-color: #000000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #000000;
+}
+
+/* Botones */
+.form-footer button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-footer button:last-child {
+    background-color: #ccc;
+    color: black;
+}
+
+.form-footer button:hover {
+    opacity: 0.9;
+}
+
+/* Ajuste para el total de la venta */
+#total-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#total-container label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+

@@ -1,0 +1,74 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Seleccionar Clientes {% endblock %}
+{% block Contenido %}
+
+<h2 class="dash-title">Selecciona Los Clientes</h2>
+
+<section class="recent">
+
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'crear_clientes' %}" method="GET" style="display:inline;">
+                <button class="btn-add">Registrar</button>
+            </form>
+        </div>
+
+        <!-- Search Bar for Filtering -->
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <form method="POST">
+            {% csrf_token %}
+            <table class="styled-table" >
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre 1</th>
+                        <th>Nombre 2</th>
+                        <th>Apellido 1</th>
+                        <th>Apellido 2</th>
+                        <th>Tipo de Documento</th>
+                        <th>Numero de Documento</th>
+                        <th>Correo 1</th>
+                        <th>Correo 2</th>
+                        <th>Telefono 1</th>
+                        <th>Telefono 2</th>
+                        <th>Dirección</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Género</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td><input type="checkbox" name="clientes" value="{{ cliente.idclientes }}"></td>
+                        <td>{{ cliente.nombre1 }}</td>
+                        <td>{{ cliente.nombre2 }}</td>
+                        <td>{{ cliente.apellido1 }}</td>
+                        <td>{{ cliente.apellido2 }}</td>
+                        <td>{{ cliente.tipodocumento }}</td>
+                        <td>{{ cliente.numerodocumento }}</td>
+                        <td>{{ cliente.correo1 }}</td>
+                        <td>{{ cliente.correo2 }}</td>
+                        <td>{{ cliente.telefono1 }}</td>
+                        <td>{{ cliente.telefono2 }}</td>
+                        <td>{{ cliente.direccion }}</td>
+                        <td>{{ cliente.fechanacimiento }}</td>
+                        <td>{{ cliente.genero }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Enviar correo</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

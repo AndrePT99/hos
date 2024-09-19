@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Cambiar Contraseña {% endblock %}
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+
+<div class="card">
+    <div class="card-header">
+        Cambiar Contraseña
+    </div>
+    <div class="card-body">
+        <form method="POST" class="form-container" novalidate>
+            {% csrf_token %}
+            
+            <!-- Mostrar errores generales (no relacionados con campos específicos) -->
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+
+            <!-- Campo de contraseña actual -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_old_password">Contraseña actual</label>
+                    {{ form.old_password }}
+                    <div class="error-message">
+                        {{ form.old_password.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campos para la nueva contraseña -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_new_password1">Nueva contraseña</label>
+                    {{ form.new_password1 }}
+                    <div class="error-message">
+                        {{ form.new_password1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_new_password2">Confirmar nueva contraseña</label>
+                    {{ form.new_password2 }}
+                    <div class="error-message">
+                        {{ form.new_password2.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                <a href="#" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

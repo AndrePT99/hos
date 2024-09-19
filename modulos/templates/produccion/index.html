@@ -1,0 +1,101 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Produccion {% endblock %}
+{% block Contenido %} 
+
+<h2 class="dash-title">Producción</h2>
+            
+<div class="dash-cards">
+    
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-reload"></span>
+            <div>
+                <h5>Consultar Gasto Insumo </h5>
+                <h4>↓</h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'lista_gastoInsumo' %}">Ver Lista</a>
+        </div>
+    </div>
+    
+    
+</div>
+
+<section class="recent"></section>
+
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'crear_produccion' %}" method="GET" style="display:inline;">
+                <button class="btn-add" style="background-color: #00913f; color: white; border: none;">Registrar</button>
+            </form>
+            <form action="{% url 'exportar_produccion' %}" method="get">
+                <button class="btn-download" type="submit" style="background-color:	#1034A6; color: white; border: none;">
+                    <i class="fas fa-download"></i> Descargar
+                </button>
+            </form> 
+            
+        </div>
+    
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class="table-responsive">
+        <table class="styled-table"> 
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Estado</th>
+                    <th>Fecha de Creación</th>
+                    <th>Fecha de Finalización</th>
+                    <th>Detalle de Venta</th>
+                    <th>Acciones</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                {% for ordendeproduccion in ordendeproduccion %}
+                 <tr>
+                    <td>{{ ordendeproduccion.idordendeproduccion }}</td>
+                    <td>{{ ordendeproduccion.estado }}</td>
+                    <td>{{ ordendeproduccion.fechacreacion }}</td>
+                    <td>{{ ordendeproduccion.fechafinalizacion }}</td>
+                    <td>
+                        {{ ordendeproduccion.detalleventa_iddetalleventa.venta_idventas.numeroventa }} -
+                        {{ ordendeproduccion.detalleventa_iddetalleventa.producto_idproducto.codigo }} -
+                        {{ ordendeproduccion.detalleventa_iddetalleventa.producto_idproducto.nombrecategoria }} -
+                        {{ ordendeproduccion.detalleventa_iddetalleventa.producto_idproducto.nombreproducto }} -
+                        {{ ordendeproduccion.detalleventa_iddetalleventa.producto_idproducto.color }}
+                    </td>
+                    
+            
+                    <td>
+                        <form action="{% url 'editar_produccion' ordendeproduccion.idordendeproduccion %}" method="GET" style="display:inline;">
+                            <button type="submit" class="btn-edit">✏️</button>
+                        </form>
+            
+                        |
+            
+                        <form action="{% url 'eliminar_produccion' ordendeproduccion.idordendeproduccion %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-delete">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>           
+
+</section>
+
+
+
+{% endblock %}

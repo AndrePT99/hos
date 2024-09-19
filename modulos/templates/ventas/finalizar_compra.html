@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block titulo %} Finalizar Compra {% endblock %}
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+
+<div class="card">
+    <div class="card-header">
+        Finalizar Compra
+    </div>
+    <div class="card-body">
+        <form method="POST" class="form-container" novalidate>
+            {% csrf_token %}
+            
+            <!-- Mostrar errores generales del formulario -->
+            {% if venta_form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ venta_form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <!-- Mostrar los campos de la venta -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_metododepago_idmetododepago">Método de Pago</label>
+                    {{ venta_form.metododepago_idmetododepago }}
+                    <div class="error-message">{{ venta_form.metododepago_idmetododepago.errors }}</div>
+                </div>
+            </div>
+
+            <!-- Campos ocultos que son necesarios -->
+            {{ venta_form.fechaventa }}
+            {{ venta_form.modalidadventa }}
+
+            <!-- Mostrar los campos del cliente (readonly) -->
+            <h3>Información del Cliente</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_nombre1">Primer Nombre</label>
+                    {{ venta_form.nombre1 }}
+                    <div class="error-message">{{ venta_form.nombre1.errors }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="id_nombre2">Segundo Nombre</label>
+                    {{ venta_form.nombre2 }}
+                    <div class="error-message">{{ venta_form.nombre2.errors }}</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_apellido1">Primer Apellido</label>
+                    {{ venta_form.apellido1 }}
+                    <div class="error-message">{{ venta_form.apellido1.errors }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="id_apellido2">Segundo Apellido</label>
+                    {{ venta_form.apellido2 }}
+                    <div class="error-message">{{ venta_form.apellido2.errors }}</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_tipodocumento">Tipo de Documento</label>
+                    {{ venta_form.tipodocumento }}
+                    <div class="error-message">{{ venta_form.tipodocumento.errors }}</div>
+                </div>
+                <div class="form-group">
+                    <label for="id_numerodocumento">Número de Documento</label>
+                    {{ venta_form.numerodocumento }}
+                    <div class="error-message">{{ venta_form.numerodocumento.errors }}</div>
+                </div>
+            </div>
+
+            <!-- Mostrar los detalles de la compra -->
+            <h3>Detalle de la Compra</h3>
+            <table id="productos-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos_carrito %}
+                        <tr>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.cantidad }}</td>
+                            <td>{{ producto.precio }}</td>
+                            <td>{{ producto.subtotal }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Mostrar el total de la compra -->
+            <div class="form-group">
+                <label>Total Venta:</label>
+                <input type="text" id="total-venta" class="form-control" value="{{ total_venta }}" readonly>
+            </div>
+
+            <!-- Botones para finalizar o cancelar la compra -->
+            <div class="form-buttons">
+                <br>
+                <button type="submit" class="btn btn-primary">Finalizar</button>
+                <a href="{% url 'mostrar_carrito' %}" class="btn btn-secondary">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

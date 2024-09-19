@@ -1,0 +1,138 @@
+body {
+    background-color: #f4f7f6;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card {
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 700px;
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #000000;
+    color: white;
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 1;
+    padding: 0 10px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+/* Botones */
+button, .btn-secondary {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 48%;  /* Asegura que ambos botones ocupen el 48% del ancho del contenedor */
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+
+button {
+    background-color: #000000;
+    color: white;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el botón "Volver" */
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Asegura que el formulario esté centrado y que las casillas tengan el mismo ancho */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    button, .btn-secondary {
+        width: 100%;  /* Los botones ocupan el 100% del ancho en pantallas pequeñas */
+    }
+}
+
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+
+
+
+
+

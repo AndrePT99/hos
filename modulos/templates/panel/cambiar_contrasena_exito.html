@@ -1,0 +1,11 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Crear Usuario {% endblock %}
+
+{% block Contenido %}
+    <div class="message-container">
+        <h2>¡Contraseña cambiada con éxito!</h2>
+        <p>Tu contraseña ha sido cambiada correctamente.</p>
+        <a href="{% url 'inicio' %}">Regresar al inicio</a>
+    </div>
+{% endblock %}

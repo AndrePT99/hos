@@ -1,0 +1,81 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Registrar Compra Producto {% endblock %}
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+
+<div class="card">
+    <div class="card-header">
+        Registrar Compra de Producto
+    </div>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data" class="form-container">
+            {% csrf_token %}
+
+            <!-- Mostrar errores generales (no relacionados con campos específicos) -->
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_fechacompra">Fecha de Compra <span class="text-danger">*</span></label>
+                    {{ form.fechacompra }}
+                    <div class="error-message">
+                        {{ form.fechacompra.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_proveedor_idproveedor">Proveedor <span class="text-danger">*</span></label>
+                    {{ form.proveedor_idproveedor }}
+                    <div class="error-message">
+                        {{ form.proveedor_idproveedor.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_producto_idproducto">Producto <span class="text-danger">*</span></label>
+                    {{ form.producto_idproducto }}
+                    <div class="error-message">
+                        {{ form.producto_idproducto.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_cantidad">Cantidad <span class="text-danger">*</span></label>
+                    {{ form.cantidad }}
+                    <div class="error-message">
+                        {{ form.cantidad.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_preciounitario">Precio Unitario <span class="text-danger">*</span></label>
+                    {{ form.preciounitario }}
+                    <div class="error-message">
+                        {{ form.preciounitario.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_preciototal">Precio Total <span class="text-danger">*</span></label>
+                    {{ form.preciototal }}
+                    <div class="error-message">
+                        {{ form.preciototal.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones alineados -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{% url 'inventario' %}" class="btn btn-secondary">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

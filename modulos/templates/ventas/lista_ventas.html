@@ -1,0 +1,106 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Ventas {% endblock %}
+{% block Contenido %} 
+
+<h2 class="dash-title">Ventas</h2>
+            
+<div class="dash-cards">
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-briefcase"></span>
+            <div>
+                <h5>Graficos</h5>
+                <h4>↓</h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'graficos_ventas' %}">Ver Graficos</a>
+        </div>
+    </div>
+    
+    
+</div>
+
+<section class="recent">
+
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'verificar_cliente' %}" method="GET" style="display:inline;">
+                <button class="btn-add" style="background-color: #00913f; color: white; border: none;">Registrar</button>
+            </form>
+            <form action="{% url 'exportar_ventas' %}" method="get">
+                <button class="btn-download" type="submit" style="background-color:	#1034A6; color: white; border: none;">
+                    <i class="fas fa-download"></i> Descargar
+                </button>
+            </form> 
+        </div>
+    
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class="table-responsive">
+        <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Numero Venta</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Tipo de Documento</th>
+                        <th>Número de Documento</th>
+                        <th>Dirección</th>
+                        <th>Productos</th>
+                        <th>Fecha</th>
+                        <th>Precio del Producto</th>
+                        <th>Modalidad</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venta in ventas %}
+                        <tr>
+                            <td>{{ venta.numeroventa }}</td>
+                            <td>{{ venta.cliente_idclientes.nombre1 }} {{ venta.cliente_idclientes.nombre2 }}</td>
+                            <td>{{ venta.cliente_idclientes.apellido1 }} {{ venta.cliente_idclientes.apellido2 }}</td>
+                            <td>{{ venta.cliente_idclientes.tipodocumento }}</td>
+                            <td>{{ venta.cliente_idclientes.numerodocumento }}</td>  
+                            <td>{{ venta.cliente_idclientes.direccion }}</td>
+                            <td>
+                                <ul>
+                                    {% for detalle in venta.detalleventa_set.all %}
+                                        <li>
+                                            <strong>Producto:</strong> {{ detalle.producto_idproducto.nombreproducto }} <br>
+                                            <strong>Código:</strong> {{ detalle.producto_idproducto.codigo }} <br>
+                                            <strong>Precio:</strong> {{ detalle.producto_idproducto.precio }} <br>
+                                            <strong>Color:</strong> {{ detalle.producto_idproducto.color }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td>{{ venta.fechaventa }}</td>
+                            <td>{{ venta.valortotal }}</td>
+                            <td>{{ venta.modalidadventa }}</td>
+                            <td>{{ venta.estado }}</td>
+                            <td>
+                                {% if venta.estado != 'Anulada' %}
+                                    <form action="{% url 'anular_venta' venta.idventas %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas anular esta venta?');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-warning">Anular</button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        </table> 
+    </div>          
+</section>
+
+{% endblock %}

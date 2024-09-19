@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block titulo %} Te ayudamos{% endblock %}
+
+{% block Contenido %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/ayuda.css' %}">
+<body>
+    <!-- Sección de la imagen de encabezado -->
+    <div class="header-image">
+        <img src="{% static 'img/productos.jpg' %}" alt="Imagen de ayuda" class="header-img">
+        <h1>Te Ayudamos</h1>
+    </div>
+
+    <!-- Título Preguntas Frecuentes -->
+    <div class="faq-title">
+        <h2>Preguntas Frecuentes</h2>
+    </div>
+
+    <!-- Sección de Preguntas Frecuentes -->
+    <div class="faq-section">
+        <!-- Pregunta 1 -->
+        <div class="faq-item">
+            <button class="faq-question">¿Cómo puedo hacer un pedido?</button>
+            <div class="faq-answer">
+                <p>Puedes hacer un pedido a través de nuestra página web seleccionando los productos que te interesen y siguiendo los pasos del proceso de compra, también puedes hacer compras en nuestra tienda física.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="faq-item">
+            <button class="faq-question">¿Cuáles son los métodos de pago aceptados?</button>
+            <div class="faq-answer">
+                <p>Aceptamos pagos con tarjetas de crédito, débito, efectivo, Nequi y Daviplata.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="faq-item">
+            <button class="faq-question">¿Cómo puedo saber la talla adecuada?</button>
+            <div class="faq-answer">
+                <p>En cada producto encontrarás una guía de tallas que te ayudará a elegir la que mejor se ajuste a ti.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="faq-item">
+            <button class="faq-question">¿Ofrecen envíos internacionales?</button>
+            <div class="faq-answer">
+                <p>Sí, ofrecemos envíos a la mayoría de los países. Puedes consultar los detalles de envíos al finalizar tu compra.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="faq-item">
+            <button class="faq-question">¿Ofrecen pagos contra entrega?</button>
+            <div class="faq-answer">
+                <p>Sí, ofrecemos la opción de pago contra entrega en determinadas zonas. Esta modalidad te permite pagar por tu compra al momento de recibir el producto en la comodidad de tu hogar. Es importante tener en cuenta que este servicio está sujeto a disponibilidad geográfica.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="faq-item">
+            <button class="faq-question">¿El producto es 100% cuero o es cuero sintético?</button>
+            <div class="faq-answer">
+                <p>Sí, todos nuestros productos están fabricados con cuero 100% auténtico. Nos enorgullecemos de trabajar únicamente con materiales de la más alta calidad.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="faq-item">
+            <button class="faq-question">¿Cuánto tiempo tarda en llegar mi compra?</button>
+            <div class="faq-answer">
+                <p>El tiempo de entrega varía según la ubicación y el tipo de envío seleccionado. Los envíos nacionales tardan entre 3 y 7 días hábiles, mientras que los internacionales entre 3 y 5 días hábiles.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 8 -->
+        <div class="faq-item">
+            <button class="faq-question">¿Cómo puedo contactarme con la empresa?</button>
+            <div class="faq-answer">
+                <p>Puedes contactarnos directamente a través de Instagram o WhatsApp. En Instagram, estamos como @jhonnie_vermonds y en WhatsApp al número (+57 3184499238).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script para manejar la interacción de las preguntas -->
+    <script>
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+{% endblock %}

@@ -1,0 +1,133 @@
+.dashboard-container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-header h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+}
+
+.chart-header select {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto 20px auto;
+}
+
+.chart-container img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.ventas-info {
+    margin: 20px 0;
+}
+
+.ventas-tabs {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #ccc;
+}
+
+.ventas-tabs li {
+    margin-right: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #7f8c8d;
+}
+
+.ventas-tabs .active {
+    color: #2c3e50;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.barra-ventas {
+    display: flex;
+    margin-top: 10px;
+}
+
+.barra-ventas span {
+    display: inline-block;
+    height: 30px;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.info-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.info-box {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.info-box i {
+    font-size: 2rem;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.info-box h3 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.info-box p {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.info-box.ventas {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.info-box.ingresos {
+    background-color: #3498db;
+    color: white;
+}
+
+.info-box.productos {
+    background-color: #9b59b6;
+    color: white;
+}
+
+.info-box i {
+    color: white;
+}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block titulo %} Nosotros {% endblock %}
+
+{% block Contenido %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/nosotros.css' %}">
+
+<body>
+    <header class="header-nosotros">
+        <img src="{% static 'img/productos.jpg' %}" alt="Imagen de encabezado" class="header-image">
+        <h1>Acerca de JHONNIE VERMONDS</h1>
+    </header>
+
+    <section class="about-section">
+        <div class="container">
+            <p>En <strong>JHONNIE VERMONDS</strong>, nos apasiona el arte del cuero. Fundada en 2024, nuestra empresa ha crecido con un objetivo en mente: crear productos de cuero de la más alta calidad, fusionando la tradición artesanal con el diseño contemporáneo.</p>
+
+            <hr>
+
+            <div class="section history-section">
+                <div class="image">
+                    <img src="https://www.semana.com/resizer/v2/CKHPYW4EHVFBPG734PFBX3AZ6M.jpg?auth=d31e27ca611b2f9fa66632ef1170efc9abf6a7c7a298d9096acaaf83455dac87&smart=true&quality=75&width=1280&height=720" alt="Nuestra Historia" class="section-image">
+                </div>
+                <div class="text">
+                    <h2>Nuestra Historia</h2>
+                    <p>Lo que comenzó como un pequeño taller, se ha transformado en una marca reconocida internacionalmente. Desde nuestras raíces, cada pieza es confeccionada a mano con atención al detalle, utilizando solo los mejores materiales.</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="section values-section">
+                <div class="image">
+                    <img src="https://nidux.com/wp-content/uploads/2023/10/quesonlosvaloresdeunaempresa-costarica-nidux.jpg" alt="Nuestros Valores" class="section-image">
+                </div>
+                <div class="text">
+                    <h2>Nuestros Valores</h2>
+                    <ul>
+                        <li><strong>Calidad:</strong> Creemos en la durabilidad y excelencia en cada producto que ofrecemos.</li>
+                        <li><strong>Sostenibilidad:</strong> Estamos comprometidos con prácticas sostenibles, seleccionando cuero de origen responsable.</li>
+                        <li><strong>Diseño Exclusivo:</strong> Nuestros diseños combinan lo mejor de lo clásico y lo moderno.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="section commitment-section">
+                <div class="image">
+                    <img src="https://www.liveagent.com/app/uploads/2021/10/research_20_10percent.svg" alt="Compromiso con Nuestros Clientes" alt="Compromiso con Nuestros Clientes" class="section-image">
+                </div>
+                <div class="text">
+                    <h2>Compromiso con Nuestros Clientes</h2>
+                    <p>En <strong>JHONNIE VERMONDS</strong>, nuestro mayor orgullo es la satisfacción de nuestros clientes. Nos esforzamos por superar las expectativas, ofreciendo productos elegantes, cómodos y duraderos.</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="contact-section">
+                <h2>Contacto</h2>
+                <p>¿Tienes alguna pregunta o sugerencia? Nos encantaría escucharte. <a href="https://wa.me/message/SYUDQYXA5NMPK1">Contáctanos</a> y estaremos encantados de ayudarte.</p>
+            </div>
+        </div>
+    </section>
+</body>
+
+{% endblock %}

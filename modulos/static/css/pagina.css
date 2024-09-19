@@ -1,0 +1,312 @@
+/* styles.css */
+
+/* General styles for the page */
+body {
+    font-family: 'Titillium Web', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+.header {
+    background-color: #000;
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    position: fixed; /* Fija la barra en la parte superior */
+    top: 0; /* Fija la barra en la parte superior de la página */
+    left: 0; /* Fija la barra en el borde izquierdo */
+    z-index: 1000; /* Asegura que la barra esté sobre otros elementos */
+}
+
+main {
+    margin-top: 50px; /* Añade espacio superior para evitar que el contenido quede oculto debajo de la barra */
+
+}
+
+.navbar-brand {
+    color: rgb(248, 245, 245); /* color blanco para la marca */
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+}
+
+.navbar-nav .dropdown-menu {
+    background-color: #000; /* Background color for dropdown menus */
+}
+
+.navbar-nav .dropdown-item {
+    color: #fff; /* Text color for dropdown items */
+    background-color: transparent; /* Transparent background for dropdown items */
+    transition: color 0.3s, background-color 0.3s; /* Smooth transition for text color and background color change */
+}
+
+.navbar-nav .dropdown-item:hover {
+    color: #f00; /* Red color for text on hover */
+    background-color: transparent; /* No change in background color on hover */
+}
+
+/* carrusel de imagenes */
+.image-carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 2px 0;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.carousel-images img {
+    width: 33.33%; /* 100% / número de imágenes visibles (3 en este caso) */
+    object-fit: cover;
+    height: auto;
+}
+ 
+
+/*botones del body*/
+.button-bar {
+    background-color: rgb(253, 253, 253); /* Fondo blanco */
+    padding: 10px; /* Espaciado alrededor de los botones */
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.gender-button {
+    background-color: black; /* Fondo negro */
+    color: rgb(255, 255, 255); /* Texto negro */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 16px; /* Tamaño del texto */
+    cursor: pointer; /* Cursor de mano al pasar por encima */
+    border-radius: 5px; /* Esquinas redondeadas */
+}
+
+.gender-button:hover {
+    background-color: rgb(61, 59, 59); /* Fondo más oscuro al pasar por encima */
+}
+
+
+/*imagen grande chica*/
+.large-image {
+    width: 100%;
+    height: 900px; /* Ajusta esta altura según tus necesidades */
+    object-fit: cover; /* Esto asegura que la imagen cubra el área sin distorsionarse */
+    display: block;
+   
+}
+
+
+/* Product list styles */
+.product-list {
+    padding: 20px;
+    border-bottom: 2px solid #000;
+}
+
+.product-list h2 {
+    color: #f00; /* Red color for section headings */
+}
+
+.product-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.product-list ul li {
+    background-color: transparent; /* Transparent background */
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: color 0.3s, background-color 0.3s; /* Smooth transition for text color and background color change */
+}
+
+.product-list ul li:hover {
+    color: #f00; /* Red color for text on hover */
+    background-color: #f0f0f0; /* Light gray background color on hover */
+    cursor: pointer; /* Cursor change on hover */
+}
+
+/* Footer styles */
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/* Iconos barra de herramientas */
+.icon {
+    font-size: 20px; /* Ajusta el tamaño según tus necesidades */
+}
+
+
+/* Optional: Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .carousel-images {
+        width: calc(100% * 4); /* Ajusta si cambias el número de imágenes visibles */
+    }
+
+    .carousel-images img {
+        width: 25%;
+        max-width: 25%;
+    }
+}
+
+/* Carrusel de videos */
+.video-carousel {
+    position: relative;
+    width: 100%; /* Ajusta el ancho del carrusel según sea necesario */
+    overflow: hidden; /* Oculta los videos que se desbordan */
+    margin: 0 auto; /* Centra el carrusel horizontalmente */
+}
+
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-video {
+    width: 1350%; /* Ajusta el ancho del video para que ocupe el ancho del carrusel */
+    height: 800px; /* Ajusta la altura del video según sea necesario */
+    max-width: 100%; /* Asegura que el video no se expanda más allá del contenedor */
+    object-fit: cover; /* Ajusta cómo el video se ajusta al contenedor */
+}
+
+/* Botones del carrusel */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+/* 6 imagenes*/
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    gap: 10px; /* Espacio entre las imágenes */
+    justify-items: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+}
+
+.image-grid img {
+    max-width: 80%; /* Las imágenes ocuparán el 80% del ancho de su celda */
+    height: auto; /* Mantiene la proporción */
+    margin: 0 auto; /* Asegura que las imágenes estén centradas */
+}
+
+/*iconos de RS*/
+.footer {
+    background-color: #f5f0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer a {
+    margin: 0 10px; 
+    color: #f8f4f4;
+    text-decoration: none;
+}
+
+.footer i {
+    font-size: 36px; /* Ajusta el tamaño según tu preferencia */
+}
+
+
+/* General styles for the page */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Titillium Web', sans-serif;
+    color: #333;
+}
+
+/* Main content should take all available space */
+main {
+    flex: 1;
+    margin-top: 50px; /* Espacio para evitar que el contenido quede oculto debajo de la barra */
+}
+
+/* Footer should be at the bottom */
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+/* Optional adjustments for responsiveness */
+@media (max-width: 768px) {
+    .footer {
+        padding: 10px;
+    }
+}
+
+
+
+/* Cambiar color de fondo del submenú a negro */
+.dropdown-menu {
+    background-color: #000; /* Fondo negro */
+    border: none; /* Sin borde */
+}
+
+/* Cambiar el color del texto de los elementos del submenú a blanco */
+.dropdown-menu .dropdown-item {
+    color: #fff; /* Texto en blanco */
+}
+
+/* Cambiar el color del texto y el fondo cuando se selecciona un elemento del submenú */
+.dropdown-menu .dropdown-item:hover {
+    background-color: #333; /* Fondo gris oscuro cuando se selecciona */
+    color: #fff; /* Mantener el texto en blanco */
+}
+
+/* Cambiar el color del divisor en el menú desplegable */
+.dropdown-divider {
+    border-color: #666; /* Divisor gris */
+}
+
+
+/* Quitar el subrayado del enlace del nombre del usuario */
+.navbar .dropdown-toggle {
+    text-decoration: none; /* Sin subrayado */
+}
+
+/* Opcional: cambiar el color del texto si lo deseas */
+.navbar .dropdown-toggle:hover {
+    color: #fff; /* Mantener el color del texto en blanco cuando el mouse pasa por encima */
+}

@@ -1,0 +1,127 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Crear Producto {% endblock %}
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+
+<div class="card">
+    <div class="card-header">
+        Crear Producto
+    </div>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data" class="form-container" novalidate>
+            {% csrf_token %}
+            
+            <!-- Mostrar errores generales (no relacionados con campos específicos) -->
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+
+            <!-- Primera fila: Código y Nombre de Categoría -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_codigo">Código</label>
+                    {{ form.codigo }}
+                    <div class="error-message">
+                        {{ form.codigo.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_nombrecategoria">Nombre de Categoría</label>
+                    {{ form.nombrecategoria }}
+                    <div class="error-message">
+                        {{ form.nombrecategoria.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segunda fila: Nombre de Producto y Precio -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_nombreproducto">Nombre de Producto</label>
+                    {{ form.nombreproducto }}
+                    <div class="error-message">
+                        {{ form.nombreproducto.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_precio">Precio</label>
+                    {{ form.precio }}
+                    <div class="error-message">
+                        {{ form.precio.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tercera fila: Calidad y Dimensión -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_calidad">Calidad</label>
+                    {{ form.calidad }}
+                    <div class="error-message">
+                        {{ form.calidad.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_dimension">Dimensión</label>
+                    {{ form.dimension }}
+                    <div class="error-message">
+                        {{ form.dimension.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_cantidad">Cantidad</label>
+                    {{ form.cantidad }}  <!-- Aquí añadimos el campo cantidad -->
+                    <div class="error-message">
+                        {{ form.cantidad.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cuarta fila: Color y Observaciones -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_color">Color</label>
+                    {{ form.color }}
+                    <div class="error-message">
+                        {{ form.color.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_observaciones">Observaciones</label>
+                    {{ form.observaciones }}
+                    <div class="error-message">
+                        {{ form.observaciones.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quinta fila: Género y Imagen del Producto -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_genero">Género</label>
+                    {{ form.genero }}
+                    <div class="error-message">
+                        {{ form.genero.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_imagenproducto">Imagen del Producto</label>
+                    {{ form.imagenproducto }}
+                    <div class="error-message">
+                        {{ form.imagenproducto.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones para Guardar y Volver -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{% url 'inventario' %}" class="btn btn-secondary">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

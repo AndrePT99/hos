@@ -1,0 +1,52 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Anular Venta {% endblock %}
+{% block Contenido %} 
+
+
+<h2>Anular Venta</h2>
+
+<p>¿Estás seguro de que quieres anular la venta con los siguientes detalles?</p>
+
+<table>
+    <tr>
+        <th>ID Venta:</th>
+        <td>{{ venta.idventas }}</td>
+    </tr>
+    <tr>
+        <th>Valor Total:</th>
+        <td>{{ venta.valortotal }}</td>
+    </tr>
+    <tr>
+        <th>Fecha Venta:</th>
+        <td>{{ venta.fechaventa }}</td>
+    </tr>
+    <tr>
+        <th>Modalidad Venta:</th>
+        <td>{{ venta.modalidadventa }}</td>
+    </tr>
+    <tr>
+        <th>Cliente:</th>
+        <td>{{ venta.cliente_idclientes }}</td>
+    </tr>
+    <tr>
+        <th>Método de Pago:</th>
+        <td>{{ venta.metododepago_idmetododepago }}</td>
+    </tr>
+    <tr>
+        <th>Estado:</th>
+        <td>{{ venta.estado }}</td>
+    </tr>
+</table>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmar Anulación</button>
+</form>
+
+<a href="{% url 'ventas' %}">Cancelar</a>
+
+
+
+
+{% endblock %}

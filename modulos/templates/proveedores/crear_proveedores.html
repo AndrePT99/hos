@@ -1,0 +1,158 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Crear Proveedor {% endblock %}
+
+{% block Contenido %} 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+
+<div class="card">
+    <div class="card-header">
+        Crear Proveedor
+    </div>
+    <div class="card-body">
+        <form method="POST" class="form-container" novalidate>
+            {% csrf_token %}
+            
+            <!-- Mostrar errores generales (no relacionados con campos específicos) -->
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+
+            <!-- Tipo de Proveedor y Categoría del Proveedor -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_tipoproveedor">Tipo de Proveedor</label>
+                    {{ form.tipoproveedor }}
+                    <div class="error-message">
+                        {{ form.tipoproveedor.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_categoriaproveedor">Categoría del Proveedor</label>
+                    {{ form.categoriaproveedor }}
+                    <div class="error-message">
+                        {{ form.categoriaproveedor.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nombres del Contacto -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_nombre1">Primer Nombre</label>
+                    {{ form.nombre1 }}
+                    <div class="error-message">
+                        {{ form.nombre1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_nombre2">Segundo Nombre</label>
+                    {{ form.nombre2 }}
+                    <div class="error-message">
+                        {{ form.nombre2.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apellidos del Contacto -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_apellido1">Primer Apellido</label>
+                    {{ form.apellido1 }}
+                    <div class="error-message">
+                        {{ form.apellido1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_apellido2">Segundo Apellido</label>
+                    {{ form.apellido2 }}
+                    <div class="error-message">
+                        {{ form.apellido2.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nombre de la Empresa -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_nombreempresa">Nombre de la Empresa</label>
+                    {{ form.nombreempresa }}
+                    <div class="error-message">
+                        {{ form.nombreempresa.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dirección y Sitio Web -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_direccion">Dirección</label>
+                    {{ form.direccion }}
+                    <div class="error-message">
+                        {{ form.direccion.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_sitioweb">Sitio Web</label>
+                    {{ form.sitioweb }}
+                    <div class="error-message">
+                        {{ form.sitioweb.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teléfonos y Correos -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_telefono1">Teléfono 1</label>
+                    {{ form.telefono1 }}
+                    <div class="error-message">
+                        {{ form.telefono1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_telefono2">Teléfono 2</label>
+                    {{ form.telefono2 }}
+                    <div class="error-message">
+                        {{ form.telefono2.errors }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_correo1">Correo 1</label>
+                    {{ form.correo1 }}
+                    <div class="error-message">
+                        {{ form.correo1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_correo2">Correo 2</label>
+                    {{ form.correo2 }}
+                    <div class="error-message">
+                        {{ form.correo2.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comentarios -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_comentarios">Comentarios</label>
+                    {{ form.comentarios }}
+                    <div class="error-message">
+                        {{ form.comentarios.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{% url 'proveedor' %}" class="btn btn-secondary">Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

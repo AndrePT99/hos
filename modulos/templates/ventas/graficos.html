@@ -1,0 +1,59 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Gráficas {% endblock %}
+
+{% block Contenido %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/grafi.css' %}">
+
+<div class="dashboard-container">
+    <!-- Título del gráfico -->
+    <div class="chart-header">
+        <h2>Mis Ventas</h2>
+        <select id="filtro-fecha">
+            <option>01-12-2018 - 31-12-2018</option>
+            <!-- Aquí puedes agregar otras opciones de fechas si las necesitas -->
+        </select>
+    </div>
+
+    <!-- Mostrar la gráfica generada -->
+    <div class="chart-container">
+        <img src="data:image/png;base64,{{ grafica }}" alt="Gráfico de Ventas">
+    </div>
+
+    <!-- Sección de origen de ventas y detalle -->
+    <div class="ventas-info">
+        <ul class="ventas-tabs">
+            <li class="active">Origen de Ventas</li>
+            <li>Detalle por productos</li>
+        </ul>
+        <div class="ventas-origen">
+            <div class="barra-ventas">
+                <span style="width: 35%; background-color: #1abc9c;">35% Virtual</span>
+                <span style="width: 24%; background-color: #3498db;">24% Precencial</span>
+                <!-- Puedes añadir más segmentos aquí si es necesario -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cuadros informativos -->
+    <div class="info-boxes">
+        <div class="info-box ventas">
+            <i class="fas fa-tag"></i>
+            <h3>Ventas</h3>
+            <p>{{ total_ventas }}</p>
+        </div>
+        <div class="info-box ingresos">
+            <i class="fas fa-wallet"></i>
+            <h3>Ingresos</h3>
+            <p>${{ total_ingresos }}</p>
+        </div>
+        <div class="info-box productos">
+            <i class="fas fa-box-open"></i>
+            <h3>Cantidad de Productos</h3>
+            <p>{{ total_productos }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

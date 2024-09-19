@@ -1,0 +1,22 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %}
+    Inicio
+{% endblock %}
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/inicio_das.css' %}">
+
+<div class="flex-container">
+    <div class="text-container">
+        {% if user.is_authenticated %}
+            <h1 class="welcome-text">¡Bienvenido, {{ user.username }}!</h1>
+            <p class="sub-text">Gracias por su visita</p>
+        {% endif %}
+    </div>
+    <div class="image-container">
+        <img src="{% static 'img/logo.png' %}" class="right-image" alt="Imagen de bienvenida">
+    </div>
+</div>
+{% endblock %}

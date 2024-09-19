@@ -1,0 +1,128 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Insumos {% endblock %}
+{% block Contenido %}
+
+<h2 class="dash-title">Insumos</h2>
+
+<div class="dash-cards">
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-briefcase"></span>
+            <div>
+                <h5>Compra Insumo</h5>
+                <h4>↓</h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'crear_compraInsumo' %}">Ver formulario</a>
+        </div>
+    </div>
+
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-reload"></span>
+            <div>
+                <h5>Lista de Compra insumos </h5>
+                <h4>↓</h4>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'lista_compraInsumo' %}">Ver formulario</a>
+        </div>
+    </div>
+
+    <div class="card-single">
+        <div class="card-body">
+            <span class="ti-package"></span>  <!-- Ícono relacionado con insumos -->
+            <div>
+                <h5>Total Insumos</h5>
+            <br/>
+                <h4>{{ cantidad_insumos }} Insumos</h4> <!-- Mostramos la cantidad de insumos -->
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<section class="recent"></section>
+
+    <div class="actions-bar">
+        <div class="action-buttons">
+            <form action="{% url 'crear_insumo' %}" method="GET" style="display:inline;">
+                <button class="btn-add" style="background-color: #00913f; color: white; border: none;">Registrar</button>
+            </form>
+            <form action="{% url 'exportar_insumos' %}" method="get">
+                <button class="btn-download" type="submit" style="background-color:	#1034A6; color: white; border: none;">
+                    <i class="fas fa-download"></i> Descargar
+                </button>
+            </form> 
+            
+        </div>
+    
+        <div class="search-bar">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Buscar..." value="{{ query }}" class="search-input">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class="table-responsive">
+        <table class="styled-table"> 
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Color</th>
+                    <th>Unidad de Medida</th>
+                    <th>Cantidad</th>
+                    <th>Fecha de Registro</th>
+                    <th>Dimension</th>
+                    <th>Imagen</th>
+                    <th>Cantidad</th>
+                    <th>Acciones</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                {% for insumo in insumos %}
+                <tr>
+                    <td>{{ insumo.idinsumos }}</td>
+                    <td>{{ insumo.nombreinsumo }}</td>
+                    <td>{{ insumo.color }}</td>
+                    <td>{{ insumo.unidaddemedida }}</td>    
+                    <td>{{ insumo.cantidad }}</td>
+                    <td>{{ insumo.fecharegistro }}</td>
+                    <td>{{ insumo.dimension }}</td>
+                    <td>
+                        {% if insumo.imageninsumo %}
+                            <img src="{{ insumo.imageninsumo.url }}" alt="{{ imageninsumo.nombreinsumo }}" width="100">
+                        {% else %}
+                            <p>No hay imagen disponible</p>
+                        {% endif %}
+                    </td>
+                    <td>{{ insumo.cantidad }}</td>
+                    <td>
+                        <form action="{% url 'editar_insumo' insumo.idinsumos %}" method="GET" style="display:inline;">
+                            <button type="submit" class="btn-edit">✏️</button>
+                        </form>
+                        <form action="{% url 'eliminar_insumo' insumo.idinsumos %}" method="POST" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-delete">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No se encontraron insumos.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>           
+
+</section>
+
+{% endblock %}

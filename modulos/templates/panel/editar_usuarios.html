@@ -1,0 +1,151 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Editar Usuario {% endblock %}
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+
+<div class="card">
+    <div class="card-header">
+        Editar Usuario
+    </div>
+    <div class="card-body">
+        <form method="POST" class="form-container" novalidate>
+            {% csrf_token %}
+
+            <!-- Mostrar errores generales (no relacionados con campos específicos) -->
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+
+            <!-- Número de documento y tipo de documento -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_numerodocumento">Número de documento</label>
+                    {{ form.numerodocumento }}
+                    <!-- Mostrar errores de validación para numerodocumento -->
+                    <div class="error-message">
+                        {{ form.numerodocumento.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_tipodedocumento">Tipo de documento</label>
+                    {{ form.tipodedocumento }}
+                    <!-- Mostrar errores de validación para tipodedocumento -->
+                    <div class="error-message">
+                        {{ form.tipodedocumento.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nombres -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_primernombre">Primer nombre</label>
+                    {{ form.primernombre }}
+                    <!-- Mostrar errores de validación para primernombre -->
+                    <div class="error-message">
+                        {{ form.primernombre.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_segundonombre">Segundo nombre</label>
+                    {{ form.segundonombre }}
+                    <!-- Mostrar errores de validación para segundonombre -->
+                    <div class="error-message">
+                        {{ form.segundonombre.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apellidos -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_primeraprellido">Primer apellido</label>
+                    {{ form.primeraprellido }}
+                    <!-- Mostrar errores de validación para primeraprellido -->
+                    <div class="error-message">
+                        {{ form.primeraprellido.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_segundoaprellido">Segundo apellido</label>
+                    {{ form.segundoaprellido }}
+                    <!-- Mostrar errores de validación para segundoaprellido -->
+                    <div class="error-message">
+                        {{ form.segundoaprellido.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Correos y Teléfonos -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_correo1">Correo 1</label>
+                    {{ form.correo1 }}
+                    <!-- Mostrar errores de validación para correo1 -->
+                    <div class="error-message">
+                        {{ form.correo1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_correo2">Correo 2</label>
+                    {{ form.correo2 }}
+                    <!-- Mostrar errores de validación para correo2 -->
+                    <div class="error-message">
+                        {{ form.correo2.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teléfonos -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_telefono1">Teléfono 1</label>
+                    {{ form.telefono1 }}
+                    <!-- Mostrar errores de validación para telefono1 -->
+                    <div class="error-message">
+                        {{ form.telefono1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_telefono2">Teléfono 2</label>
+                    {{ form.telefono2 }}
+                    <!-- Mostrar errores de validación para telefono2 -->
+                    <div class="error-message">
+                        {{ form.telefono2.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rol y Usuario -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_rol_idrol">Rol</label>
+                    {{ form.rol_idrol }}
+                    <!-- Mostrar errores de validación para rol_idrol -->
+                    <div class="error-message">
+                        {{ form.rol_idrol.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_user">Usuario del Sistema</label>
+                    {{ form.user }}
+                    <!-- Mostrar errores de validación para user -->
+                    <div class="error-message">
+                        {{ form.user.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a href="{% url 'lista_usuarios' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

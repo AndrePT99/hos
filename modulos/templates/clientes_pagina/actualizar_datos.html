@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Actualizar Datos {% endblock %}
+
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+
+<div class="card">
+    <div class="card-header">
+        Actualizar Datos
+    </div>
+    <div class="card-body">
+        <form method="POST" class="form-container" novalidate>
+            {% csrf_token %}
+
+            <!-- Mostrar errores generales (no relacionados con campos específicos) -->
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+
+            <!-- Nombres y apellidos -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_nombre1">Primer nombre</label>
+                    {{ form.nombre1 }}
+                    <div class="error-message">
+                        {{ form.nombre1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_nombre2">Segundo nombre</label>
+                    {{ form.nombre2 }}
+                    <div class="error-message">
+                        {{ form.nombre2.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_apellido1">Primer apellido</label>
+                    {{ form.apellido1 }}
+                    <div class="error-message">
+                        {{ form.apellido1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_apellido2">Segundo apellido</label>
+                    {{ form.apellido2 }}
+                    <div class="error-message">
+                        {{ form.apellido2.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dirección y correos -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_direccion">Dirección</label>
+                    {{ form.direccion }}
+                    <div class="error-message">
+                        {{ form.direccion.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_correo1">Correo 1</label>
+                    {{ form.correo1 }}
+                    <div class="error-message">
+                        {{ form.correo1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_correo2">Correo 2</label>
+                    {{ form.correo2 }}
+                    <div class="error-message">
+                        {{ form.correo2.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teléfonos y Fecha de Nacimiento -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_telefono1">Teléfono 1</label>
+                    {{ form.telefono1 }}
+                    <div class="error-message">
+                        {{ form.telefono1.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_telefono2">Teléfono 2</label>
+                    {{ form.telefono2 }}
+                    <div class="error-message">
+                        {{ form.telefono2.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_fechanacimiento">Fecha de Nacimiento</label>
+                    {{ form.fechanacimiento }}
+                    <div class="error-message">
+                        {{ form.fechanacimiento.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Género -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_genero">Género</label>
+                    {{ form.genero }}
+                    <div class="error-message">
+                        {{ form.genero.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="#" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

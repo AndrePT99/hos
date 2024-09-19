@@ -1,0 +1,90 @@
+{% extends 'dashboard.html' %}
+
+{% block titulo %} Crear Insumo {% endblock %}
+{% block Contenido %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/formularios.css' %}">
+<div class="card">
+    <div class="card-header">
+        Crear Insumo
+    </div>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data" class="form-container" novalidate>
+            {% csrf_token %}
+
+            <!-- Mostrar errores generales (no relacionados con campos específicos) -->
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+
+            <!-- Campos del formulario con validación de errores -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_nombreinsumo">Nombre del Insumo <span class="text-danger">*</span></label>
+                    {{ form.nombreinsumo }}
+                    <div class="error-message">
+                        {{ form.nombreinsumo.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_color">Color <span class="text-danger">*</span></label>
+                    {{ form.color }}
+                    <div class="error-message">
+                        {{ form.color.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_unidaddemedida">Unidad de Medida <span class="text-danger">*</span></label>
+                    {{ form.unidaddemedida }}
+                    <div class="error-message">
+                        {{ form.unidaddemedida.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_cantidad">Cantidad <span class="text-danger">*</span></label>
+                    {{ form.cantidad }}
+                    <div class="error-message">
+                        {{ form.cantidad.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_fecharegistro">Fecha de Registro <span class="text-danger">*</span></label>
+                    {{ form.fecharegistro }}
+                    <div class="error-message">
+                        {{ form.fecharegistro.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_dimension">Dimensión <span class="text-danger">*</span></label>
+                    {{ form.dimension }}
+                    <div class="error-message">
+                        {{ form.dimension.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id_imageninsumo">Imagen del Insumo (Opcional)</label>
+                    {{ form.imageninsumo }}
+                    <div class="error-message">
+                        {{ form.imageninsumo.errors }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones alineados -->
+            <div class="form-buttons">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{% url 'inventario' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
